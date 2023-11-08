@@ -6,7 +6,7 @@
 
 ### **JavaScript Fundamentals**
 
-- **[D1: JavaScript Fundamentals](Lecture-Code/D1-ES6_Desctructuring_ArrowFunctions/)**
+- **[D1: JavaScript Fundamentals: ES6, Destructuring, and Arrow Functions](Lecture-Code/D1-ES6_Desctructuring_ArrowFunctions/)**
     - Intro to MERN
     - ECMAScript
     - Debugging
