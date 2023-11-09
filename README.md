@@ -6,8 +6,8 @@ Course Taken: ２０２３年０４月
 
 - **JavaScript Fundamentals**
     - [#001: Predict Destructuring](JS_Fundamentals/001-Predict_Destructuring/)
+    - [#002: Convert to Arrow](JS_Fundamentals/002-Convert_to_Arrow/)
     ---
-    - [#002: Convert to Arrow](#)
     - [#003: Object Master](#)
 
 - **Intro to React**
