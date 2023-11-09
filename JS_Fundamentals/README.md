@@ -1,4 +1,4 @@
-# Week 1: Python Fundamentals
+# Week 1: JavaScript Fundamentals
 
 ２０２３年１１月０８日（水）
 
