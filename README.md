@@ -5,7 +5,7 @@ Course Taken: ２０２３年０４月
 ### Projects List
 
 - **JavaScript Fundamentals**
-    - [#001: Predict Destructuring](Wk1-JS_Fundamentals/001-Predict_Destructuring/)
+    - [#001: Predict Destructuring](JS_Fundamentals/001-Predict_Destructuring/)
     ---
     - [#002: Convert to Arrow](#)
     - [#003: Object Master](#)
