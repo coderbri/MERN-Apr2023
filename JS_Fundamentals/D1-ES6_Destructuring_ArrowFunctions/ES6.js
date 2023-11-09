@@ -64,3 +64,26 @@ console.log(updatedPerson); // { name: 'Johnny Test', age: 47, hasDog: true }
 let roster = ['Caden', 'Ben', 'Amy', 'Lindsey']
 let [person1, person2, ...everyoneElse] = roster
 console.log(everyoneElse); // [ 'Amy', 'Lindsey' ]
+
+
+// ? Explain the difference between function declaration and function expression
+// * function declaration
+function foo() {
+    console.log('foo');
+}
+foo(); // foo
+
+// * function expression
+var fooTwo = function() {
+    console.log('foo')
+}
+fooTwo()
+
+// Example 2
+var sayHello = function(name) {
+    console.log('Hello ' + name);
+}
+sayHello("Bri");
+
+const sayHelloAgain = (name) => console.log(`Hello ${name}!`);
+sayHelloAgain("Jane");

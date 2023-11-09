@@ -1,6 +1,6 @@
 # Week 1: Python Fundamentals
 
-２０２３年１１月０８日（水）- ２０２３年＿月＿日（＿）
+２０２３年１１月０８日（水）
 
 ## Topics Covered
 
