@@ -11,7 +11,7 @@ Course Taken: ２０２３年０４月
     - [#003: Object Master](#)
 
 - **Intro to React**
-    - [#004: First React](#)
+    - [#004: First React](Wk1-React/004-First_React/)
     - [#005: First JSX](#)
     - [#006: Prop It Up](#)
     - [#007: Putting it Together](#)
