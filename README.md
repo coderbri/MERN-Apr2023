@@ -14,8 +14,10 @@ Course Taken: ２０２３年０４月
     - [#004: First React](Wk1-React/004-First_React/)
     - [#004: First Vite](Wk1-React/004-First_Vite/)
     - [#005: First JSX](Wk1-React/005-First_JSX/)
+
+- **Functional Components**
+    - [#006: Prop It Up](Wk2-Functional_Components/006-Prop_it_Up/)
     ---
-    - [#006: Prop It Up](#)
     - [#007: Putting it Together](#)
     - [#008: Hook Form](#)
     - [#009: More Forms](#)
