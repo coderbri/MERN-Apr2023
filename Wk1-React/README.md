@@ -1,6 +1,6 @@
 # Week 1: Introduction to React
 
-２０２３年１１月０９日（木）ー ２０２３年１１月＿（＿）
+２０２３年１１月０９日（木）ー ２０２３年１１月１１（土）
 
 ### Topics Covered
 
