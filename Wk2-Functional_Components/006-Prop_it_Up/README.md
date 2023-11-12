@@ -96,5 +96,5 @@ export default PersonCard;
 
 3. **Props**: Props are used to pass data from the `App` component to each instance of the `PersonCard` component, allowing for dynamic content.
 
-<!-- --- -->
+---
 <p align="right">Completed: ２０２３年１１月１２日（日）</p>
