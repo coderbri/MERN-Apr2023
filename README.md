@@ -12,6 +12,8 @@ Course Taken: ２０２３年０４月
 
 - **Intro to React**
     - [#004: First React](Wk1-React/004-First_React/)
+    - [#004: First Vite](Wk1-React/004-First_Vite/)
+    ---
     - [#005: First JSX](#)
     - [#006: Prop It Up](#)
     - [#007: Putting it Together](#)
