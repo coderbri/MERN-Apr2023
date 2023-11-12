@@ -6,7 +6,7 @@
 ## D3 Lecture Material
 
 #### Intro to React (continued...)
-- use the extension, **JS JSX snippets**! (**skyran.js-jsx-snippets**)
+- use these extension, **ES7 React/Redux/GraphQL/React-Native snippets** and **JS JSX snippets**! (**skyran.js-jsx-snippets**)
 - Babel | Syntatic Sugar
 - Investigate React Files created by `npx create-react-app app-name`
 - Create our first component

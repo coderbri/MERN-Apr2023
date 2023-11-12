@@ -3,7 +3,7 @@ import React from 'react';
 // * In React, components are defined as functions taht take in props (input) and return a description of the UI (output)
 
 const Nav = ( props ) => {
-    console.log(props)
+    // console.log(props)
     let { name } = props // destructure the user's name from the props object
     
     return (
