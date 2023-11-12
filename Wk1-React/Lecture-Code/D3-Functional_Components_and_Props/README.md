@@ -1,15 +1,17 @@
 # Functional Components & Props
 
 #### Week 1 Session 3
-２０２３年１１月＿日（＿）
+２０２３年１１月１１日（土）
 
 ## D3 Lecture Material
 
 #### Intro to React (continued...)
-- Create our first component
-- Introduce props
+- use the extension, **JS JSX snippets**! (**skyran.js-jsx-snippets**)
 - Babel | Syntatic Sugar
 - Investigate React Files created by `npx create-react-app app-name`
-- _Why use components?_
 - Create our first component
-- _Props! What are they, and how do we use them?_
+    - _Why use components?_
+    - helps manage parts of the React app
+- Introduce props
+    - _Props! What are they, and how do we use them?_
+    - Props are used to pass data between component files and the App.js file that's hosting the whole React app.
