@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Shows = (props) => {
+const Shows = ({ title, releaseYear }) => {
     // console.log(props) // ? prints object
     // console.log(props.title) // ? prints value in the key of the object
+    
     return (
-        <div className='mb-4'>
-            <h3>Title: { props.title }</h3>
-            <h5>Release Year: { props.releaseYear }</h5>
+        <div className='p-4 border border-3 rounded mb-4'>
+            <h3>Title: { title }</h3>
+            <p>Release Year: { releaseYear }</p>
         </div>
     );
 }
