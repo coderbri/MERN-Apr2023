@@ -1,14 +1,17 @@
 // App.jsx
 import Product from './components/Product';
+import UserForm from './components/UserForm';
 
 function App() {
   return (
     <>
-      <header className="bg-dark text-light py-2 mb-4">
+      <header className="bg-dark text-light py-2 mb-2">
         <h1 className='fw-bold text-center'>Learning React & Functional Components</h1>
       </header>
       
       <div className="container">
+        
+        <h2 className='text-center py-2'>Using useState</h2>
         <div className="row justify-content-center">
           
           <div className="col-md-6">
@@ -43,6 +46,11 @@ function App() {
               initialStock={ 10 }
             />
           </div>
+          
+          <hr className='mt-4' />
+          
+          <h2 className="text-center py-2">Using Hook Forms</h2>
+          <UserForm />
           
         </div>
       </div>

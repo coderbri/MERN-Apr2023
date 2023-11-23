@@ -1,0 +1,53 @@
+This version log provides a succinct overview of the changes made, focusing on key concepts implemented in the project.
+
+Thur, Nov 23, 2023 - Learning about Hook Forms
+
+- **State Initialization:**
+  - Utilized the `useState` hook to initialize state variables for `username`, `email`, and `password`.
+
+  ```javascript
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  ```
+
+- **Form Handling Functions:**
+  - Implemented `createUser` function to prevent default form submission behavior.
+  - Created a `newUser` object with the current values of `username`, `email`, and `password`.
+  
+  ```javascript
+  const createUser = (e) => {
+      e.preventDefault();
+  };
+  const newUser = { username, email, password };
+  console.log("Welcome", newUser);
+  ```
+
+- **Input Fields:**
+  - Configured input fields with `onChange` events to update corresponding state variables (`username`, `email`, or `password`).
+
+  ```javascript
+  <input
+      type="text"
+      onChange={(e) => setUsername(e.target.value)}
+      value={username}
+      className="form-control"
+  />
+  ```
+
+- **Form Submission:**
+  - Implemented an `onSubmit` event triggering the `createUser` function when the "Create User" button is clicked.
+
+  ```javascript
+  <form onSubmit={createUser}>
+      {/* ... */}
+      <input type="submit" value="Create User" className="btn btn-dark" />
+  </form>
+  ```
+
+- **Summary:**
+  - Created a React form using controlled components, managing state through `useState`.
+  - Implemented synthetic events (`onChange` and `onSubmit`) for dynamic form interactions.
+  - Ensured form submission prevents default behavior, maintaining the React state.
+  - Utilized the `newUser` object for potential actions, such as server communication.
+```
