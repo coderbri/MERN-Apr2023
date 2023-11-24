@@ -8,6 +8,7 @@ const FormObject = () => {
         releaseYear: 1919,
         genre: '',
     })
+    // ? Access these values as obj["key"]="value": show["genre"] = "drama"
     
     const changeHandler = (e) => {
         // ? retrieve the show object and set the key name and value.
@@ -51,6 +52,14 @@ const FormObject = () => {
                 </div>
                 
             </form>
+            
+            <hr />
+            <h3 className="text-center">Form Contents</h3>
+            <div className="col-5 mx-auto text-center">
+                <p>Title: <strong>{show.title}</strong></p>
+                <p>Release Year: <strong>{show.releaseYear}</strong></p>
+                <p>Genre: <strong>{show.genre}</strong></p>
+            </div>
             
         </div>
     );
