@@ -1,4 +1,4 @@
-// App.jsx
+import ConditionallyRenderedEx from './components/ConditionallyRenderedEx';
 import Product from './components/Product';
 import UserForm from './components/UserForm';
 
@@ -51,6 +51,11 @@ function App() {
           
           <h2 className="text-center py-2">Using Hook Forms</h2>
           <UserForm />
+          
+          <hr className='mt-4' />
+          
+          <h2 className="text-center py-2">Conditional Rendering</h2>
+          <ConditionallyRenderedEx />
           
         </div>
       </div>
