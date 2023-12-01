@@ -19,6 +19,6 @@ Course Taken: ２０２３年０４月
     - [#006: Prop It Up](Wk2-Functional_Components/006-Prop_it_Up/)
     - [#007: Putting it Together](Wk2-Functional_Components/007-Putting_it_Together/)
     - [#008: Hook Form](Wk2-Functional_Components/008-Hook_Form/)
+    - [#009: More Forms](Wk2-Functional_Components/009-More_Forms/)
     ---
-    - [#009: More Forms](#)
     - [#010: Box Generator](#)
