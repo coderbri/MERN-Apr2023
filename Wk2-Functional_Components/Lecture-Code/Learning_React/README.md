@@ -2,8 +2,8 @@
 
 ### Table of Contents
 1. [App Component](#app-component)
-    1. [Product Component](#3-product-component)
-    2. [UserForm Component](#2-userform-component)
+    1. [`Product` Component](#3-product-component)
+    2. [`UserForm` Component](#2-userform-component)
         1. [Form State Management](#form-state-management)
         2. [Form Submission](#form-submission)
         3. [Form Input Fields](#form-input-fields)
@@ -11,6 +11,12 @@
     3. [Conditionally Rendered UserForm Component](#conditionally-rendered-userform-component)
         1. [Username Validation](#username-validation)
         2. [Form Submission - Updated Button](#form-submission---updated-button)
+    3. [`ChildrenTestComponent` Component](#4-childrentestcomponent-component)
+        1. [Usage in App.jsx](#usage-in-appjsx)
+        2. [ChildrenTestComponent Implementation](#childrentestcomponent-implementation)
+        3. [Understanding Children Props](#understanding-children-props)
+
+
 
 
 ## App Component
@@ -30,7 +36,7 @@ function App() {
 export default App;
 ```
 
-## 1. Product Component
+## 1. `Product` Component
 
 <div align="center">
 <img src="./readme-assets/Product-Component.png" width="450px" height="auto">
@@ -50,7 +56,7 @@ const Product = ({ title, desc, cost, initialStock }) => {
 export default Product;
 ```
 
-## 2. UserForm Component
+## 2. `UserForm` Component
 
 <div align="center">
 <img src="./readme-assets/UserForm-Component.png" width="450px" height="auto">
@@ -142,5 +148,54 @@ If there is a validation error in the username, the button is disabled, preventi
 
 These enhancements create a more user-friendly form with immediate feedback, guiding users through the submission process.
 
+
+
+
+## 4. `ChildrenTestComponent` Component
+
+The `ChildrenTestComponent` is a React component that demonstrates the use of children props. Children props allow you to pass down components or elements as children to a parent component, enabling a flexible and dynamic composition of components.
+
+### Usage in App.jsx
+
+In the `App.jsx` file, the `ChildrenTestComponent` is utilized to showcase the passing of children components via props. The component is invoked with a `header` prop and children components nested within it:
+
+```jsx
+<ChildrenTestComponent header={ "This is a Header Prop!" } >
+  <h3>Here are the children components passed down via props:</h3>
+  <ul>
+    <li>First Child</li>
+    <li>Second Child</li>
+    <li>Final Child</li>
+  </ul>
+</ChildrenTestComponent>
+```
+
+### ChildrenTestComponent Implementation
+
+The `ChildrenTestComponent` is a functional component that receives two props: `header` and `children`. The `header` prop is a string used as a title, and the `children` prop is a special prop that represents any components or elements nested within the component tags.
+
+```jsx
+import React from 'react';
+
+const ChildrenTestComponent = ({ header, children }) => {
+    return (
+        <div>
+            <p>The text below is passed as a children prop:</p>
+            <h1 className='text-center'>{ header }</h1>
+            { children }
+        </div>
+    );
+}
+
+export default ChildrenTestComponent;
+```
+
+### Understanding Children Props
+
+The `children` prop allows for dynamic content injection into a component. In this example, it renders the provided header and any children components passed down, creating a reusable and customizable component structure.
+
+This approach is beneficial when you want to create components that can have variable content while maintaining a consistent structure.
+
+
 ---
-<p align="right">Updated: ２０２３年１１月２９日（水）</p>
+<p align="right">Updated: ２０２３年１２月０１日（木）</p>

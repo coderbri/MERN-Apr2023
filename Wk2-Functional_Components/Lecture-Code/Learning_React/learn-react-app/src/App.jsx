@@ -1,3 +1,4 @@
+import ChildrenTestComponent from './components/ChildrenTestComponent';
 import ConditionallyRenderedEx from './components/ConditionallyRenderedEx';
 import Product from './components/Product';
 import UserForm from './components/UserForm';
@@ -57,6 +58,17 @@ function App() {
           <h2 className="text-center py-2">Conditional Rendering</h2>
           <ConditionallyRenderedEx />
           
+          <hr className='mt-4' />
+          
+          <h2 className="text-center py-2">Children in Components</h2>
+          <ChildrenTestComponent header={ "This is a Header Prop!" } >
+            <h3>Here are the children components passed down via props:</h3>
+            <ul>
+              <li>First Child</li>
+              <li>Second Child</li>
+              <li>Final Child</li>
+            </ul>
+          </ChildrenTestComponent>
         </div>
       </div>
     </>
