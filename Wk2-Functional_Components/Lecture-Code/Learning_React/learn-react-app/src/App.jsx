@@ -1,5 +1,6 @@
 import ChildrenTestComponent from './components/ChildrenTestComponent';
 import ConditionallyRenderedEx from './components/ConditionallyRenderedEx';
+import MapIteration from './components/MapIteration';
 import Product from './components/Product';
 import UserForm from './components/UserForm';
 
@@ -69,6 +70,12 @@ function App() {
               <li>Final Child</li>
             </ul>
           </ChildrenTestComponent>
+          
+          <hr className='mt-4' />
+          
+          <h2 className="text-center py-2">Iterating with Map</h2>
+          <MapIteration />
+          
         </div>
       </div>
     </>
