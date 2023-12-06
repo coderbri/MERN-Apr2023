@@ -11,11 +11,11 @@
     - Hooks
     - `useState`: Using **State** and Setting **State**
 
-- [D5: React Forms](#)
+- [D5: React Forms](Lecture-Code/D5-React_Forms/)
     - Forms Overview
     - Conditional Rendering
 
-- [D6: Functional Programming](#)
+- [D6: Functional Programming](Lecture-Code/D6-Functional_Programming/)
     - Ternary Operators
     - High Order & Callback Functions
     - Map & Filter
