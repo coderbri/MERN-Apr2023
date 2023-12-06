@@ -18,7 +18,10 @@
     5. [`MapIteration` Component](#mapiteration-component)
         1. [Usage in `MapIteration.jsx`](#usage-in-mapiterationjsx)
         2. [Importance of `.map()` in Development](#importance-of-map-in-development)
-
+2. [React Styling Methods](#react-styling-methods)
+    1. [Direct Import](#1-direct-import)
+    2. [Inline CSS with React State](#2-inline-css-with-react-state)
+    3. [CSS Modules](#3-css-modules)
 
 ## App Component
 
@@ -248,5 +251,125 @@ export default MapIteration;
 
 In summary, utilizing `.map()` is a fundamental practice in React development that enhances code readability, maintainability, and performance, especially when working with dynamic data. It is a key tool in creating dynamic and responsive user interfaces.
 
+
+
+
+
+## React Styling Methods
+
+This sections demonstrates three different methods for styling in React using buttons as an example. Each method offers a unique approach to managing styles within a React application.
+
+### 1. Direct Import
+
+#### File: `StyledButtonComponent1.jsx`
+
+In this method, styles are directly imported from an external CSS file (`styles/styles.css`). The button is styled using regular CSS, and the styles are applied globally.
+
+```jsx
+// StyledButtonComponent1.jsx
+import React from 'react';
+import './styles/styles.css';
+
+const StyledButtonComponent1 = ({ buttonText1 }) => {
+    return (
+        <div className="mb-3">
+            <h3 className="fs-3 fw-bold">Direct Import</h3>
+            <p>The following button is a styled button using regular CSS, and the styles used on it are shown as a result of <strong>Direct Import:</strong></p>
+            <button className='styled-btn1'>{ buttonText1 }</button>
+        </div>
+    );
+};
+
+export default StyledButtonComponent1;
+```
+
+### 2. Inline CSS with React State
+
+#### File: `StyledButtonComponent2.jsx`
+
+This method uses React state and inline CSS styling to create a dynamic button. The button's appearance changes based on user interactions, such as hover and focus. React state hooks (`useState`) are employed to manage these interactions.
+
+```jsx
+// StyledButtonComponent2.jsx
+import React, { useState } from 'react';
+
+const StyledButtonComponent2 = ({ buttonText2 }) => {
+    // State to manage hover and focus
+    const [isHovered, setIsHovered] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
+    
+    // Event handlers
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+    
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+    
+    const handleFocus = () => {
+        setIsFocused(true);
+    };
+    
+    const handleBlur = () => {
+        setIsFocused(false);
+    };
+    
+    // Inline styles based on state
+    const buttonStyle = {
+        backgroundColor: isHovered || isFocused ? '#155e75' : '#0891b2',
+        borderRadius: '8px',
+        // ... other styles removed for brevity
+    };
+    
+    return (
+        <div className="mb-3">
+            <h3 className="fs-3 fw-bold">Styled Button</h3>
+            <p>The following button is a styled button using React state and inline CSS styling:</p>
+            <button
+                style={buttonStyle}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+            >
+                {buttonText2}
+            </button>
+        </div>
+    );
+};
+
+export default StyledButtonComponent2;
+```
+
+### 3. CSS Modules
+
+#### File: `StyledButtonComponent3.jsx`
+
+This method utilizes CSS Modules to encapsulate styles at the component level. Styles are imported from a CSS module file (`styles/ButtonComponent.module.css`). This approach provides local scoping of styles to avoid global conflicts.
+
+```jsx
+// StyledButtonComponent3.jsx
+import React from 'react';
+import styles from './styles/ButtonComponent.module.css';
+
+const StyledButtonComponent3 = ({ buttonText3 }) => {
+    return (
+        <div className='mb-3'>
+            <h3 className="fs-3 fw-bold">CSS Modules</h3>
+            <p>A third approach overcomes a number of the problems of the first two:</p>
+            <button className={ styles['styled-btn3'] }>{ buttonText3 }</button>
+        </div>
+    );
+};
+
+export default StyledButtonComponent3;
+```
+
+Note when using CSS Modules:
+- The CSS module file must end in "module.css" for this method to work.
+- CSS Module class names cannot be hyphenated, so camel casing is used by convention.
+- CSS Modules offer advantages such as the ability to use media queries and complete encapsulation at the component level.
+
 ---
-<p align="right">Updated: ２０２３年１２月０１日（木）</p>
+<p align="right">Updated: ２０２３年１２月０６日（水）</p>

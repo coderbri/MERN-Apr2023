@@ -2,6 +2,9 @@ import ChildrenTestComponent from './components/ChildrenTestComponent';
 import ConditionallyRenderedEx from './components/ConditionallyRenderedEx';
 import MapIteration from './components/MapIteration';
 import Product from './components/Product';
+import StyledButtonComponent1 from './components/StyledButtonComponent1';
+import StyledButtonComponent2 from './components/StyledButtonComponent2';
+import StyledButtonComponent3 from './components/StyledButtonComponent3';
 import UserForm from './components/UserForm';
 
 function App() {
@@ -72,9 +75,14 @@ function App() {
           </ChildrenTestComponent>
           
           <hr className='mt-4' />
-          
           <h2 className="text-center py-2">Iterating with Map</h2>
           <MapIteration />
+          
+          <hr className='mt-4' />
+          <h2 className="text-center py-2">Styling in React</h2>
+          <StyledButtonComponent1 buttonText1={ "Styled Button" } />
+          <StyledButtonComponent2 buttonText2={ "Styled Button 2" } />
+          <StyledButtonComponent3 buttonText3={ "Styled Button 3" } />
           
         </div>
       </div>
