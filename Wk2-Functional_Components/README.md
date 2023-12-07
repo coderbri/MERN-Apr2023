@@ -19,3 +19,10 @@
     - Ternary Operators
     - High Order & Callback Functions
     - Map & Filter
+
+- [D7: Lifting State, Iterating with Map, and Intro to APIs with `useEffect` and Axios](Lecture-Code/D7-Lifting_State-and-Maps/)
+    - Lifting State
+    - Iterating with Map & Filter
+    - Intro to APIs
+        - `useEffect`
+        - Axis
