@@ -1,6 +1,6 @@
 # D7: Lifting State in React
 
-Concepts: **Lifting State, Iterating with Map, and Intro to APIs with `useEffect` and Axios**
+Concepts: **Lifting State & Iterating with Maps**
 
 <div style="display: flex; justify-content: space-between;">
     <p>Week 3 Session 1</p>

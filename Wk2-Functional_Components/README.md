@@ -23,6 +23,4 @@
 - [D7: Lifting State, Iterating with Map, and Intro to APIs with `useEffect` and Axios](Lecture-Code/D7-Lifting_State-and-Maps/)
     - Lifting State
     - Iterating with Map & Filter
-    - Intro to APIs
-        - `useEffect`
-        - Axis
+    - Intro to APIs (Topic moved to [D8-Intro_to_APIs](../Wk3-APIs_and_Axios/Lecture-Code/D8-Intro_to_APIs))
