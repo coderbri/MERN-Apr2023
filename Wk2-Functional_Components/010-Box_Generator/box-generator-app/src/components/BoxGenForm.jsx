@@ -68,7 +68,10 @@ const BoxGenForm = ({ listOfColors, setListOfColors }) => {
                     </div>
                     
                     <div className="col-auto">
-                        <input type="submit" value="Add Box" className='btn btn-dark' />
+                    { inputError ? 
+                        <input type="submit" value="Add Box" className='btn btn-dark' disabled />
+                        : <input type="submit" value="Add Box" className='btn btn-dark' />
+                    }
                     </div>
                 </div>
                 
