@@ -1,6 +1,8 @@
 import { useState } from "react"
 import BoxGenForm from "./components/BoxGenForm"
 import DisplayBoxes from "./components/DisplayBoxes"
+import BoxGeneratorForm from "./components/BoxGeneratorForm";
+import DisplayGeneratedBoxes from "./components/DisplayGeneratedBoxes";
 
 
 function App() {
@@ -16,7 +18,7 @@ function App() {
       
       <div className="container-fluid">
         
-        <BoxGenForm
+        {/* <BoxGenForm
           listOfColors={ boxColorArray }
           setListOfColors={ setBoxColorArray }
           />
@@ -24,7 +26,10 @@ function App() {
         <DisplayBoxes
           listOfColors={ boxColorArray }
           setListOfColors={ setBoxColorArray }
-        />
+        /> */}
+        
+        <BoxGeneratorForm listOfBoxes={ boxColorArray } setListOfBoxes={ setBoxColorArray } />
+        <DisplayGeneratedBoxes listOfBoxes={ boxColorArray } setListOfBoxes={ setBoxColorArray } />
         
       </div>
     </>
