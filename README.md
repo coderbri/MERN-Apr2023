@@ -26,13 +26,13 @@ Course Taken: ２０２３年０４月
     - [#013: Todo List](Wk2-Functional_Components/013-Todo_List/)
 
 - **APIs and Axios**
-    - [#014: Coin Flipping](#)
+    - [#014: Coin Flipping](Wk3-APIs_and_Axios/014-Coin_Flipping/)
+    ---
+    - [#015: Pokémon API](#)
 
 <!-- 
-    ---
-    - [#017: Pokémon API](#)
 
-    - [#018: Axios Pokémon API](#)
+    - [#016: Axios Pokémon API](#)
 - **React Routing**
 - **Backend — Express, Mongoose and MongoDB**
 -->
