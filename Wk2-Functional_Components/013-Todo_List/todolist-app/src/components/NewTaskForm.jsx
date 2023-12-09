@@ -20,7 +20,6 @@ const NewTaskForm = ({ todoList, setTodoList }) => {
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(`### Task: "${ newTask }" has been added!`);
-        // console.log(todoList);
         
         /* Task ID Generation:
             * Since there is no backend to this project,
@@ -46,9 +45,9 @@ const NewTaskForm = ({ todoList, setTodoList }) => {
         <div className=''>
             
             <form onSubmit={ submitHandler }>
+                { inputError ? <p className="col-8 mx-auto alert alert-danger">{ inputError }</p> : "" }
+                
                 <div className="row align-items-center justify-content-center gap-1">
-                    
-                    { inputError ? <p className="col-8 alert alert-danger">{ inputError }</p> : "" }
                     <div className="col-auto">
                         <input type="text" name="newTask"
                             onChange={ handleTaskInput } value={ newTask }

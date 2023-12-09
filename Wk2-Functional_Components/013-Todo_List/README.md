@@ -37,7 +37,7 @@ To run the application locally, follow these steps:
    npm run dev
    ```
 
-5. Open your browser and visit [ http://localhost:5173/]( http://localhost:5173/).
+5. Open your browser and visit [http://localhost:5173/](http://localhost:5173/).
 
 
 ## Features
