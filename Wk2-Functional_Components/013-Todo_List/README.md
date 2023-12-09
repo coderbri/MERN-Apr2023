@@ -87,4 +87,4 @@ To run the application locally, follow these steps:
 The application leverages `localStorage` to persist the todo list between sessions. The `useEffect` in `App.jsx` loads the todo list from `localStorage` when the component mounts, ensuring that the user's tasks persist even if the browser is refreshed. Additionally, the `NewTaskForm` and `DisplayTasks` components update `localStorage` whenever there is a change to the todo list, ensuring that the data is saved between sessions.
 
 ---
-<p align="right">Completed: ２０２３年１２月＿日（＿）</p>
+<p align="right">Completed: ２０２３年１２月０８日（金）</p>
