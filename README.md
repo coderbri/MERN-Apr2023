@@ -22,17 +22,16 @@ Course Taken: ２０２３年０４月
     - [#009: More Forms](Wk2-Functional_Components/009-More_Forms/)
     - [#010: Box Generator](Wk2-Functional_Components/010-Box_Generator/)
     - [#011: React Blocks](Wk2-Functional_Components/011-React_Blocks/)
-    ---
-    - [#012: Tabs](#)
-    - [#013: Todo List - MVP](#)
-
-<!-- 
-    - [#014: Todo List - Simplified](#)
-    - [#015: Todo List - Challenge](#)
+    - [#012: Tabs - N/A](#)
+    - [#013: Todo List](Wk2-Functional_Components/013-Todo_List/)
 
 - **APIs and Axios**
-    - [#016: Coin Flipping](#)
+    - [#014: Coin Flipping](#)
+
+<!-- 
+    ---
     - [#017: Pokémon API](#)
+
     - [#018: Axios Pokémon API](#)
 - **React Routing**
 - **Backend — Express, Mongoose and MongoDB**
