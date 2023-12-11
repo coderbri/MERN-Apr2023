@@ -27,12 +27,13 @@ Course Taken: ２０２３年０４月
 
 - **APIs and Axios**
     - [#014: Coin Flipping](Wk3-APIs_and_Axios/014-Coin_Flipping/)
+    - [#015: Pokémon API](Wk3-APIs_and_Axios/015-Pokemon_API/)
     ---
-    - [#015: Pokémon API](#)
+    - [#016: Axios Pokémon API](#)
 
 <!-- 
-
-    - [#016: Axios Pokémon API](#)
 - **React Routing**
+    - 
+
 - **Backend — Express, Mongoose and MongoDB**
 -->
