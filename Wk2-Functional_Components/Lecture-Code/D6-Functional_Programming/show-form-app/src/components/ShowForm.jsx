@@ -4,7 +4,7 @@ const ShowForm = () => {
     
     const [ show, setShow ] = useState({ // ? Access these values as obj["key"]="value": show["genre"] = "drama"
         title: '',
-        releaseYear: "",
+        releaseYear: 1920,
         genre: '',
     })
     
@@ -39,7 +39,7 @@ const ShowForm = () => {
                     <div className="col-md-9">
                         <input type="text" name='title' onChange={ changeHandler } className="form-control" />
                         {
-                            show.title.length < 2 ?
+                            show.title && show.title.length < 2 ?
                             <p className="text-center text-danger fw-medium">The title must be at least 2 characters</p>
                             : null
                         }
@@ -52,7 +52,7 @@ const ShowForm = () => {
                         <input type="number" name='releaseYear' onChange={ changeHandler } className="form-control" />
                         {
                             show.releaseYear < 1920 ?
-                            <p className="text-center text-danger fw-medium">The release year must be released after 1919</p>
+                            <p className="text-center text-danger fw-medium">The release year must be released after 1920</p>
                             : null
                         }
                     </div>
@@ -63,7 +63,7 @@ const ShowForm = () => {
                     <div className="col-md-9">
                         <input type="text" name='genre' onChange={ changeHandler } className="form-control" />
                         {
-                            show.genre.length < 2 ?
+                            show.genre && show.genre.length < 2 ?
                             <p className="text-center text-danger fw-medium">The genre must be at least 5 characters</p>
                             : null
                         }
@@ -77,11 +77,24 @@ const ShowForm = () => {
             </form>
             
             <hr />
+            
             <h3 className="text-center">Form Contents</h3>
             <div className="col-5 mx-auto text-center">
                 <p>Title: <strong>{show.title}</strong></p>
                 <p>Release Year: <strong>{show.releaseYear}</strong></p>
                 <p>Genre: <strong>{show.genre}</strong></p>
+            </div>
+            
+            <hr />
+            
+            <h3 className="text-center">Shows List</h3>
+            <div className="col-5 mx-auto text-center">
+                { allShows.map((thisShow, i) => 
+                <div key={ i }>
+                    <h4 className="fst-italic fw-semibold">{ thisShow.title }</h4>
+                    <p>{ thisShow.releaseYear } • { thisShow.genre }</p>
+                </div>
+                )}
             </div>
             
         </div>
