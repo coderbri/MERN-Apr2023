@@ -1,3 +1,28 @@
+// Higher Order & Callback Functions
+// Higher Order Function: a function that takes a function as an argument or returns a function
+// Callback Function: a function that is passed as an argument to another function
+
+// Base Functions
+function add(a, b) {
+    return a + b;
+}
+function subtract(a, b) {
+    return a - b;
+}
+function multiply(a, b) {
+    return a * b;
+}
+function divide(a, b) {
+    return a / b;
+}
+function calculator(a, b, operator) {
+    return operator(a, b);
+}
+
+console.log(calculator(10, 5, add));
+console.log(calculator(10, 5, subtract));
+
+
 // ! The following functions are NOT efficient, NOT DRY!
 // ! its better to take in a parameter to square a num
 const squareTen = () => {
