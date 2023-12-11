@@ -1,6 +1,6 @@
 # Week 3: APIs and Axios
 
-２０２３年１２月０６日（水）ー ２０２３年１２月＿（＿）
+２０２３年１２月０６日（水）ー ２０２３年１２月１１日（月）
 
 ## Topics Covered
 
@@ -11,4 +11,6 @@
     - - `useEffect`
         - Axios
 
-- [D9: Promises & APIs](#)
+- [D9: Promises & APIs](Lecture-Code/D9-Promises_APIs_and_Axios/)
+    - Intro to APIs, Part II
+        - Promises Oveview
