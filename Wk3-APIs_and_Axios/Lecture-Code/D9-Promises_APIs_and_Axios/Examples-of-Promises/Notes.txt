@@ -1,0 +1,7 @@
+HTTP Methods
+
+- GET (ONE): "/books" Lists all the books in the database.
+- DELETE: "/books/{bookId}" Deletes a book based on their id.
+- POST: "/books/create" Creates a book.
+- PUT: "/books/{bookId}" Method to update a book.
+- GET (ALL): "/books/{bookId}" Retrieves a book based on their id.
