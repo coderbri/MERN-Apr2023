@@ -8,7 +8,7 @@
 
 - [D8: Intro to APIs & Axios](Lecture-Code/D8-Intro_to_APIs/)
     - Intro to APIs
-    - - `useEffect`
+        - `useEffect`
         - Axios
 
 - [D9: Promises & APIs](Lecture-Code/D9-Promises_APIs_and_Axios/)
