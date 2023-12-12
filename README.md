@@ -29,12 +29,18 @@ Course Taken: ２０２３年０４月
     - [#014: Coin Flipping](Wk3-APIs_and_Axios/014-Coin_Flipping/)
     - [#015: Pokémon API](Wk3-APIs_and_Axios/015-Pokemon_API/)
     - [#016: Axios Pokémon API](Wk3-APIs_and_Axios/016-Axios_Pokemon_API/)
-    ---
 - **React Routing**
-    - [#017: Routing Practice](#)
-
-<!-- 
-    - 
+    - [#017: React Routing](Wk2-Functional_Components/017-React_Routing/)
+    ---
+    - [#018: LukeAPI Walker](#)
 
 - **Backend — Express, Mongoose and MongoDB**
--->
+    - [#019: Postman + Pokémon](#)
+    - [#020: Faker API](#)
+    - [#021: Using MongoDB](#)
+    - [#022: Jokes API](#)
+
+- **Full-Stack MERN**
+    - [#023: Product Manager - Part I](#)
+    - [#024: Product Manager - Part II](#)
+    - [#025: Product Manager - Part III](#)
