@@ -12,5 +12,5 @@
         - Axios
 
 - [D9: Promises & APIs](Lecture-Code/D9-Promises_APIs_and_Axios/)
-    - Intro to APIs, Part II
+    - Intro to RESTful APIs, Part II
         - Promises Oveview
