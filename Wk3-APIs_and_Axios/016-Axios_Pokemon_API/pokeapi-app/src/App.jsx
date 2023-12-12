@@ -9,7 +9,7 @@ function App() {
       </header>
       
       <div className="container-fluid">
-        <div className="col-8 mx-auto">
+        <div className="col-11 col-lg-8 mx-auto">
           <RenderPokemon />
         </div>
       </div>

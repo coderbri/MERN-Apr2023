@@ -56,6 +56,14 @@ export default RenderPokemon;
 
 This file contains the `RenderPokemon` component, which handles fetching and displaying Pokémon data based on a button click. The `useEffect` hook is used to manage the API call using Axios.
 
+#### Updated: ２０２３年１２月１１日（月）
+In this updated version, the Pokémon data is now managed more efficiently. The sprites are displayed, and the elements are organized using flex properties for a cleaner presentation.
+
+<div align="center">
+<img src="./readme-assets/AxiosPokeAPI-withSprites.png" width="250px" height="auto">
+</div>
+
+
 ### Understanding Axios and useEffect
 
 #### Axios

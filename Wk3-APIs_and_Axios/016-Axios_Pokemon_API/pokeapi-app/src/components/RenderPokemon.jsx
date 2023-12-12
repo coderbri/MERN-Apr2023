@@ -9,9 +9,21 @@ const RenderPokemon = () => {
     // useEffect to fetch Pokémon data when the button is clicked
     useEffect(() => {
         axios.get('https://pokeapi.co/api/v2/pokemon?limit=807')
-            .then((response) => {
+            .then( async (response) => {
                 const pokemonArray = response.data.results;
-                setPokemonData(pokemonArray);
+                
+                // Fetch sprite URLs for each Pokémon
+                const spritePromises = pokemonArray.map( async (pokemon) => {
+                    const capitalizedName = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+                    const spriteResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
+                    return {
+                        name: capitalizedName,
+                        sprite: spriteResponse.data.sprites.front_default,
+                    };
+                });
+                
+                const spritesData = await Promise.all(spritePromises);
+                setPokemonData(spritesData);
             })
             .catch(error => console.log(error));
     }, [ buttonClicked ]);
@@ -30,11 +42,20 @@ const RenderPokemon = () => {
             </div>
             
             {buttonClicked && (
-                <ul>
+                <div className="my-4 d-flex flex-wrap justify-content-center gap-3">
                 { pokemonData.map(( pokemon, index ) => {
-                    return ( <li key={ index }>{ pokemon.name }</li> )
+                    return (
+                        <div key={ index } className='p-2 rounded rounded-5 border border-5 border-secondary'>
+                            <img src={ pokemon.sprite } alt={ `${pokemon.name} sprite` } />
+                            <div className="text-center">
+                                <p>{ index+1 } <br />
+                                    <b>{ pokemon.name }</b>
+                                </p>
+                            </div>
+                        </div>
+                    )
                 }) }
-                </ul>
+                </div>
             )}
         </div>
     );
