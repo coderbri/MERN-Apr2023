@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
 import Homepage from './components/Homepage'
 import About from './components/About'
 import RenderWord from './components/RenderWord'
+import Form from './components/Form'
+import RenderFormInputs from './components/RenderFormInputs'
 
 function App() {
   return (
@@ -29,7 +31,10 @@ function App() {
             {/*       Route     -     ComponentName */}
             <Route path='/home' element={ <Homepage /> } />
             <Route path='/about' element={ <About /> } />
-            <Route path="/word/:usersword" element={ <RenderWord /> } />
+            <Route path="/word/:usersword/:color" element={ <RenderWord /> } />
+            
+            <Route path="/" element={ <Form /> } />
+            <Route path='/render/:color/:id' element={ <RenderFormInputs /> } />
           </Routes>
           
           

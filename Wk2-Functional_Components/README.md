@@ -24,3 +24,10 @@
     - Lifting State
     - Iterating with Map & Filter
     - Intro to APIs (Topic moved to [D8-Intro_to_APIs](../Wk3-APIs_and_Axios/Lecture-Code/D8-Intro_to_APIs))
+
+- [D10: React Routing](Lecture-Code/D10-React_Routing/)
+    - _**What is Routing?**_
+    - Anatomy of a URL
+    - React Router
+        - `useNavigate`
+        - `useParams`
