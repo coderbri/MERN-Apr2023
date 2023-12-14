@@ -147,6 +147,3 @@ Ensure to test the routes, especially during development. Postman can be used fo
 2. For POST requests, use the route [https://localhost:8000/api/post](https://localhost:8000/api/post) and provide the necessary request body.
 
 These steps ensure that the server is correctly configured and handles requests as expected.
-```
-
-Feel free to adjust the content as needed for your specific project and audience.
