@@ -1,4 +1,4 @@
-Commands used:
+Queries used:
 
 ```bash
 $ mongo
