@@ -38,8 +38,8 @@ Course Taken: ２０２３年０４月
     - [#019: Postman + Pokémon](Wk4-Backend_Development/019-Postman_Pokemon/)
     - [#020: Faker API](Wk4-Backend_Development/020-Faker_API/)
     - [#021: MongoDB Practice](Wk4-Backend_Development/021-MongoDB_Practice/)
+    - [#022: Jokes API](Wk4-Backend_Development/022-Jokes_API/)
     ---
-    - [#022: Jokes API](#)
 
 - **Full-Stack MERN**
     - [#023: Product Manager - Part I](#)
