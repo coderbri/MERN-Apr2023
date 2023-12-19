@@ -4,6 +4,7 @@ const Joke = require("../models/joke.model");
 module.exports.findAllJokes = (request, response) => {
     Joke.find()
         .then((allJokes) => {
+            console.log( "Jokes Found!\n", allJokes );
             response.json({ jokes: allJokes });
         })
         .catch((error) => {
@@ -17,6 +18,23 @@ module.exports.findOneJoke = (request, response) => {
         .then(( aSingleJoke ) => {
             console.log( "Joke Found!\n", aSingleJoke );
             response.json({ joke: aSingleJoke });
+        })
+        .catch((error) => {
+            response.json({ message: "Error retrieving this joke.", error: error });
+        });
+}
+
+// GET ONE (random)
+module.exports.findRandomJoke = (request, response) => {
+    Joke.countDocuments()
+        .exec()
+        .then((count) => {
+            const randomIndex = Math.floor(Math.random() * count);
+            return Joke.findOne().skip( randomIndex ).exec();
+        })
+        .then((randomJoke) => {
+            console.log( "Here is a Random Joke!\n", randomJoke );
+            response.json({ randomJoke: randomJoke });
         })
         .catch((error) => {
             response.json({ message: "Error retrieving this joke.", error: error });
