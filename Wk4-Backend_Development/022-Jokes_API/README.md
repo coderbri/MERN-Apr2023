@@ -98,13 +98,19 @@ In the **controllers** directory, the [**`joke.controller.js`**](./server/contro
    - Responds with a JSON object containing the retrieved joke.
    - Handles errors by responding with an error message and details if the retrieval fails.
 
-3. **CREATE a New Joke (`createNewJoke`):**
+3. **GET ONE (Random) Joke (`findRandomJoke`):**
+   - Counts the total number of documents in the `Joke` collection.
+   - Generates a random index and retrieves a joke from that index in the collection.
+   - Responds with a JSON object containing the randomly retrieved joke.
+   - Handles errors by responding with an error message and details if the retrieval fails.
+
+4. **CREATE a New Joke (`createNewJoke`):**
    - Uses the `Joke` model to create a new joke based on the request body.
    - Logs the newly created joke to the console.
    - Responds with a JSON object containing the newly created joke.
    - Handles errors by responding with an error message and details if the creation fails.
 
-4. **UPDATE an Existing Joke (`updateExistingJoke`):**
+5. **UPDATE an Existing Joke (`updateExistingJoke`):**
    - Finds and updates an existing joke based on the provided `_id` parameter in the request.
    - Uses the request body for the update data.
    - Logs the updated joke to the console.
@@ -128,16 +134,18 @@ In the **routes** directory, the [**`joke.routes.js`**](./server/routes/joke.rou
 const JokesController = require("../controllers/joke.controller");
 
 module.exports = app => {
-    // GET ALL
-    app.get("/api/jokes", JokesController.findAllJokes); // Returns a list of all jokes
-    // GET ONE
-    app.get("/api/jokes/:id", JokesController.findOneJoke); // Returns one joke with a matching :id
-    // CREATE
-    app.post("/api/jokes", JokesController.createNewJoke); // Adds a new joke to the database
-    // UPDATE
-    app.patch("/api/jokes/:id", JokesController.updatedExistingJoke); // Partially updates an existing joke with a matching :id
-    // DELETE
-    app.delete("/api/jokes/:id", JokesController.deleteExistingJoke); // Removes a joke with a matching :id
+   // GET ONE (random)
+   app.get("/api/jokes/random", JokesController.findRandomJoke);
+   // GET ALL
+   app.get("/api/jokes", JokesController.findAllJokes); // Returns a list of all jokes
+   // GET ONE
+   app.get("/api/jokes/:id", JokesController.findOneJoke); // Returns one joke with a matching :id
+   // CREATE
+   app.post("/api/jokes", JokesController.createNewJoke); // Adds a new joke to the database
+   // UPDATE
+   app.patch("/api/jokes/:id", JokesController.updatedExistingJoke); // Partially updates an existing joke with a matching :id
+   // DELETE
+   app.delete("/api/jokes/:id", JokesController.deleteExistingJoke); // Removes a joke with a matching :id
 }
 ```
 
