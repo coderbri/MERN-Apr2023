@@ -26,13 +26,13 @@ module.exports.createShow = ( request, response ) => {
 // * UPDATE
 
 // * GET ONE
-module.exports.findOneShow = ( request, resposne ) => {
+module.exports.findOneShow = ( request, response ) => {
     Show.findOne({ _id: request.params.id })
         .then((oneSingleShow) => {
-            resposne.json({ show: oneSingleShow });
+            response.json({ show: oneSingleShow });
         })
         .catch((error) => {
-            resposne.json({ message: "Something went wrong", error: error });
+            response.json({ message: "Something went wrong", error: error });
         });
 }
 
