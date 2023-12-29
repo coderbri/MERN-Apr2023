@@ -27,3 +27,5 @@ const ShowSchema = new mongoose.Schema({
     ```
 - start adding the front end by installing react via vite
 - displaying errors in from the backend to the front end (CreateShowForm.jsx)
+    - ensure `.catch()` error responds with status code 400, and just the error object param
+    - set the errors

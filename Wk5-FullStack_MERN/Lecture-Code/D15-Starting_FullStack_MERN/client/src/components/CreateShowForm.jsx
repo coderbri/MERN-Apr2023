@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CreateShowForm = ({ showList, setShowList }) => {
     
+    const navigate = useNavigate();
     // ! Always initialize state with some datatype! Never leave it empty!
     const [ show, setShow ] = useState({ // ? Access these values as obj["key"]="value": show["genre"] = "drama"
         title: '',
@@ -11,7 +13,6 @@ const CreateShowForm = ({ showList, setShowList }) => {
         creator: '',
         genre: '',
     })
-    
     const [ errors, setErrors ] = useState({});
     
     /* How do we track changes made?
@@ -44,18 +45,24 @@ const CreateShowForm = ({ showList, setShowList }) => {
         axios.post('http://localhost:8000/api/show/new', show)
             .then((response) => {
                 console.log(response);
+                navigate('/');
+                
+                /* In the case that a wireframe requires to stay on the form page:
+                    To reset the form so it will empty contents, use Two-Way Data-Binding:
+                    1. Set show to its original state as its defined in lines 5-9.
+                    2. Then equal the HTML `value` attribute to that state: ex. value={ show.title }
+                    3. Submit Form and contents will saved to state and be cleared from form
+                */
+                // setShow({ title: '', releaseYear: 1920, network: '', creator: '', genre: '' });
             })
             .catch((error) => {
                 console.log(error);
+                setErrors(error.response.data.errors);
             });
         
         // setShowList([...showList, show]); // ? collect all shows, and add the new show to that list
-        setShow({ title: '', releaseYear: 1920, network: '', creator: '', genre: '' })
-        /* To reset the form so it will empty contents, use Two-Way Data-Binding:
-            1. Set show to its original state as its defined in lines 5-9.
-            2. Then equal the HTML `value` attribute to that state: ex. value={ show.title }
-            3. Submit Form and contents will saved to state and be cleared from form
-        */
+        
+        
     }
     
     return (
@@ -68,6 +75,10 @@ const CreateShowForm = ({ showList, setShowList }) => {
                     <div>
                         <input type="text" name='title' onChange={ changeHandler } value={ show.title } />
                     </div>
+                    { errors.title
+                        ? <p>{ errors.title.message }</p>
+                        : null
+                    }
                 </div>
                 
                 <div>
@@ -75,6 +86,10 @@ const CreateShowForm = ({ showList, setShowList }) => {
                     <div>
                         <input type="number" name='releaseYear' onChange={ changeHandler } value={ show.releaseYear } />
                     </div>
+                    { errors.releaseYear 
+                        ? <p>{ errors.releaseYear.message }</p>
+                        : null
+                    }
                 </div>
                 
                 <div>
@@ -82,6 +97,10 @@ const CreateShowForm = ({ showList, setShowList }) => {
                     <div>
                         <input type="text" name='network' onChange={ changeHandler } value={ show.network } />
                     </div>
+                    { errors.network 
+                        ? <p>{ errors.network.message }</p>
+                        : null
+                    }
                 </div>
                 
                 <div>
@@ -89,6 +108,10 @@ const CreateShowForm = ({ showList, setShowList }) => {
                     <div>
                         <input type="text" name='creator' onChange={ changeHandler } value={ show.creator } />
                     </div>
+                    { errors.creator 
+                        ? <p>{ errors.creator.message }</p>
+                        : null
+                    }
                 </div>
                 
                 <div>
@@ -96,6 +119,10 @@ const CreateShowForm = ({ showList, setShowList }) => {
                     <div>
                         <input type="text" name='genre' onChange={ changeHandler } value={ show.genre } />
                     </div>
+                    { errors.genre 
+                        ? <p>{ errors.genre.message }</p>
+                        : null
+                    }
                 </div>
                 
                 <div>

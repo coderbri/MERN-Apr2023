@@ -21,7 +21,7 @@ module.exports = {
                 response.json({ show: newShow });
             })
             // `error` will better let us know what is bugging CREATE route:
-            .catch( error => response.status(400).json({ error }) );
+            .catch( error => response.status(400).json(error) );
     },
     
     // * GET ONE
