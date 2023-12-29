@@ -1,23 +1,25 @@
-import './App.css'
 import { useState } from 'react';
 import DisplayShows from './components/DisplayShows';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import CreateShowForm from './components/CreateShowForm';
+import HeaderStyled from './components/styles/Header.styled';
 
 function App() {
   const [ tvShows, setTvShows ] = useState([]); // our state is an array of objects
   
   return (
     <>
-      <header>
-        <h1>D15: Starting Full-Stack MERN</h1>
-      </header>
+      <HeaderStyled>
+        <h1 className='text-4xl font-bold text-center'>D15: Starting Full-Stack MERN</h1>
+      </HeaderStyled>
       
-      <div className="container">
+      <div className='container mx-auto'>
         <BrowserRouter>
           
-          <Link to={"/create/show/form"}>Add Show Form</Link>  <br />
-          <Link to={'/'}>Home</Link>
+          <div className="flex justify-center gap-2">
+            <Link to={"/create/show/form"}>Add Show Form</Link>
+            <Link to={'/'}>Home</Link>
+          </div>
           
           <Routes>
             <Route path='/' element={<DisplayShows tvShowsList={tvShows} setTvShowsList={setTvShows} />} />

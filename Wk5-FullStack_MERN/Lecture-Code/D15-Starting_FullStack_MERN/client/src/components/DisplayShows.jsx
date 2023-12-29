@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import axios from 'axios'
+import EditButton from './styles/EditButton.styled';
+import DeleteButton from './styles/DeleteButton.styled';
+import Button from './styles/Button.styled';
 
 const DisplayShows = ({ tvShowsList, setTvShowsList }) => {
     useEffect(() => {
@@ -25,20 +28,26 @@ const DisplayShows = ({ tvShowsList, setTvShowsList }) => {
     }, []);
     
     return (
-        <div>
-            <h2>Display All Shows</h2>
+        <div className='text-center'>
+            <h2 className='text-3xl font-bold my-3'>Display All Shows</h2>
+            
+            <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
             {
                 tvShowsList.map((show) => (
-                    <div key={show._id}>
-                        <h3>
-                            <em>{ show.title }</em>
+                    <div key={show._id} className="pt-4 px-4 rounded-md border-2 border-sky-300">
+                        <h3 className='text-xl font-bold font-serif hover:text-rose-200'>
+                            { show.title }
                         </h3>
                         <p>{ show.releaseYear }</p>
-                        {/* <p>Network: { show.network }</p> */}
-                        {/* <p>Genre(s): { show.genre }</p> */}
+                        <div className="mt-5 pb-4 flex justify-around">
+                            <Button>View</Button>
+                            <EditButton >Edit</EditButton>
+                            <DeleteButton>Delete</DeleteButton>
+                        </div>
                     </div>
                 ))
             }
+            </div>
         </div>
     );
 
