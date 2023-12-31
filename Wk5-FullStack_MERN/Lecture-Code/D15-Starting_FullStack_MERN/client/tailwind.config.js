@@ -6,7 +6,7 @@ export default {
   ],
   theme: {
     extend: {},
-    container: {
+    container: { // Defined Container's horizontal padding w/ responsiveness
       padding: {
         DEFAULT: '1rem',
         sm: '2rem',

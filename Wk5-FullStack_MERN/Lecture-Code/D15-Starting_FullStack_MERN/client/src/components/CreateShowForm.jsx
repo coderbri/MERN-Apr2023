@@ -66,67 +66,88 @@ const CreateShowForm = ({ showList, setShowList }) => {
     }
     
     return (
-        <div>
-            <h2>Add Your Favorite Show!</h2>
+        <div className='max-w-md mx-auto'>
+            <h2 className='text-center text-3xl font-bold my-3'>Add Your Favorite Show!</h2>
             
             <form onSubmit={ submitHandler }>
-                <div>
-                    <label>Title:</label>
+                <div className='mb-5'>
+                    <label className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>Title</label>
                     <div>
-                        <input type="text" name='title' onChange={ changeHandler } value={ show.title } />
+                        <input type="text" name='title' onChange={ changeHandler } value={ show.title }
+                            className='text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500'
+                            placeholder='Fullmetal Alchemist' required
+                        />
                     </div>
                     { errors.title
-                        ? <p>{ errors.title.message }</p>
+                        ? <p className='text-sm mt-2 font-bold text-red-400'>{ errors.title.message }</p>
                         : null
                     }
                 </div>
                 
-                <div>
-                    <label>Release Year:</label>
+                <div className='mb-5'>
+                    <label className='block mb-2 text-sm text-gray-900 dark:text-white'>Release Year</label>
                     <div>
-                        <input type="number" name='releaseYear' onChange={ changeHandler } value={ show.releaseYear } />
+                        <input type="number" name='releaseYear' onChange={ changeHandler } value={ show.releaseYear } 
+                            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                            required
+                        />
                     </div>
                     { errors.releaseYear 
-                        ? <p>{ errors.releaseYear.message }</p>
+                        ? <p className='text-sm mt-2 font-bold text-red-400'>{ errors.releaseYear.message }</p>
                         : null
                     }
                 </div>
                 
-                <div>
-                    <label>Network:</label>
+                <div className='mb-5'>
+                    <label className='block mb-2 text-sm text-gray-900 dark:text-white'>Network</label>
                     <div>
-                        <input type="text" name='network' onChange={ changeHandler } value={ show.network } />
+                        <input type="text" name='network' onChange={ changeHandler } value={ show.network } 
+                            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                            placeholder='Bones' required
+                        />
                     </div>
                     { errors.network 
-                        ? <p>{ errors.network.message }</p>
+                        ? <p className='text-sm mt-2 font-bold text-red-400'>{ errors.network.message }</p>
                         : null
                     }
                 </div>
                 
-                <div>
-                    <label>Creator:</label>
+                <div className='mb-5'>
+                    <label className='block mb-2 text-sm text-gray-900 dark:text-white'>Creator</label>
                     <div>
-                        <input type="text" name='creator' onChange={ changeHandler } value={ show.creator } />
+                        <input type="text" name='creator' onChange={ changeHandler } value={ show.creator } 
+                            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                            placeholder='Hiromu Arakawa' required
+                        />
                     </div>
                     { errors.creator 
-                        ? <p>{ errors.creator.message }</p>
+                        ? <p className='text-sm mt-2 font-bold text-red-400'>{ errors.creator.message }</p>
                         : null
                     }
                 </div>
                 
-                <div>
-                    <label>Genre:</label>
+                <div className='mb-5'>
+                    <label className='block mb-2 text-sm text-gray-900 dark:text-white'>Genre(s)</label>
                     <div>
-                        <input type="text" name='genre' onChange={ changeHandler } value={ show.genre } />
+                        <input type="text" name='genre' onChange={ changeHandler } value={ show.genre } 
+                            className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                            placeholder='Adventure, Dark Fantasy, Steampunk' required
+                        />
                     </div>
                     { errors.genre 
-                        ? <p>{ errors.genre.message }</p>
+                        ? <p className='text-sm mt-2 font-bold text-red-400'>{ errors.genre.message }</p>
                         : null
                     }
                 </div>
                 
                 <div>
+                    <span className='font-bold py-2 px-4 rounded 
+                        text-zinc-600
+                        bg-gradient-to-br from-violet-100 to-sky-200 
+                        hover:bg-gradient-to-br hover:from-indigo-300 hover:to-blue-300'
+                    >
                     <input type="submit" value="Add Show" />
+                    </span>
                 </div>
             </form>
             

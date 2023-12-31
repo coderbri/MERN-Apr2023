@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ViewButton = ({ children }) => {
+const Button = ({ children }) => {
     return (
         <button className='font-bold py-2 px-4 rounded 
             text-zinc-600
@@ -12,4 +12,4 @@ const ViewButton = ({ children }) => {
     );
 }
 
-export default ViewButton;
+export default Button;
