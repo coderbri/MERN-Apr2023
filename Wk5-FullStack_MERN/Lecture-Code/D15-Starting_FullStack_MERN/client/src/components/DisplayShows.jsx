@@ -39,7 +39,7 @@ const DisplayShows = ({ tvShowsList, setTvShowsList }) => {
                             { show.title }
                         </h3>
                         <p>{ show.releaseYear }</p>
-                        <div className="mt-5 pb-4 flex justify-around">
+                        <div className="mt-5 pb-4 flex justify-center gap-4">
                             <Button>View</Button>
                             <EditButton >Edit</EditButton>
                             <DeleteButton>Delete</DeleteButton>
