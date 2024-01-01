@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import axios from 'axios'
+
 import EditButton from './styles/EditButton.styled';
 import DeleteButton from './styles/DeleteButton.styled';
 import Button from './styles/Button.styled';
@@ -29,19 +31,21 @@ const DisplayShows = ({ tvShowsList, setTvShowsList }) => {
     
     return (
         <div className='text-center'>
-            <h2 className='text-3xl font-bold my-3'>Display All Shows</h2>
+            <h2 className='text-3xl font-bold my-5'>Display All Shows</h2>
             
             <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
             {
                 tvShowsList.map((show) => (
-                    <div key={show._id} className="pt-4 px-4 rounded-md border-2 border-sky-300">
+                    <div key={show._id} className="pt-4 px-4 rounded-md border-2 border-sky-200">
                         <h3 className='text-xl font-bold font-serif hover:text-rose-200'>
                             { show.title }
                         </h3>
                         <p>{ show.releaseYear }</p>
                         <div className="mt-5 pb-4 flex justify-center gap-4">
-                            <Button>View</Button>
-                            <EditButton >Edit</EditButton>
+                            <Link to={`/view/show/${show._id}`}>
+                                <Button>View</Button>
+                            </Link>
+                            <EditButton>Edit</EditButton>
                             <DeleteButton>Delete</DeleteButton>
                         </div>
                     </div>
