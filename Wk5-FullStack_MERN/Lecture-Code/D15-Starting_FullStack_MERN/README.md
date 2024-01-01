@@ -110,6 +110,10 @@ This component serves as the main structure of the application, managing the ove
 
 ### 1. DisplayShows.jsx
 
+<div align="center">
+<img src="./readme-assets/ShowApp-DisplayShows.png" width="450px" height="auto">
+</div>
+
 #### Imports:
 ```jsx
 import React, { useEffect } from 'react';
@@ -203,8 +207,12 @@ return (
 5. **Styled Buttons:** Styled buttons (`Button`, `EditButton`, `DeleteButton`) are used for actions like viewing, editing, and deleting.
 
 
-
 ### 2. CreateShowForm.jsx
+
+<div align="center">
+<img src="./readme-assets/ShowApp-CreateShowForm.png" width="450px" height="auto">
+</div>
+
 This component is a form for creating a new TV show entry. It uses local state to manage the details of the new show and form validation errors. Input fields are controlled components, and changes trigger the `changeHandler` function to update the state. On form submission, it sends a POST request to the backend API to add the new show. There, it handles errors by displaying error messages (from the backend) below the corresponding input fields. Upon successful submission, it uses programmatic navigation to go back to the home page.
 
 
@@ -280,6 +288,10 @@ const submitHandler = (e) => {
 
 
 ### 3. DisplayOneShow.jsx
+
+<div align="center">
+<img src="./readme-assets/ShowApp-DisplayOneShow.png" width="450px" height="auto">
+</div>
 
 This component fetches details of a specific TV show based on the `id` parameter from the URL. It uses local state to store the details of the show. The `useEffect` hook is used to trigger the API request when the component mounts, retrieving the show details to display in the JSX; buttons for editing and deleting the show are provided.
 
