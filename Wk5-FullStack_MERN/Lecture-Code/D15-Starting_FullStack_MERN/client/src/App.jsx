@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import DisplayShows from './components/DisplayShows';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import DisplayShows from './components/DisplayShows';
 import CreateShowForm from './components/CreateShowForm';
+import DisplayOneShow from './components/DisplayOneShow';
 import HeaderStyled from './components/styles/Header.styled';
 import Button from './components/styles/Button.styled';
-import DisplayOneShow from './components/DisplayOneShow';
 
 function App() {
   const [ tvShows, setTvShows ] = useState([]); // our state is an array of objects
