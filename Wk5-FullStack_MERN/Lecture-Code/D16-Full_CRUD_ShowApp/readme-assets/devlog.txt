@@ -1,0 +1,32 @@
+Show App - DevLog
+
+２０２３年１２月３０日（土）
+
+1.1.0
+- starting D16 lecture-code
+- New component added:`EditShowForm.jsx` . In this component, “Edit” buttons will now route to this form page, which looks similar to the `CreateShowForm` component, but will pre-populate existing show data in form inputs to update.
+- To best perform error handling, `.catch()` ==in the controller== responses are best written as:
+  ```js
+  .catch( error => response.status(400).json(error) );
+  ```
+  Based on previous testing, if it is not set up like this, frontend validations fail to show up nor does it validate if the form is correctly inputed.
+
+- A utility component was added to enable consistent date formatting—`dateUtils.js`.
+  ```jsx
+    export const formatDate = ( timestamp ) => {
+        const options = {
+    	    year: 'numeric',
+        	month: 'short',
+            day: 'numeric',
+    	    hour: 'numeric',
+    	    minute: 'numeric',
+            hour12: true
+    	}
+        const formattedDate = new Date(timestamp).toLocaleDateString( 'en-US', options );
+    	return formattedDate;
+    }
+  ```
+  Now, when timestamps are presented, they will appear as the following: **Jan 1, 2024, 2:23PM**.
+
+1.1.1
+- pending DELETE functionality

@@ -8,17 +8,16 @@
 
 - [D15: Starting Full-Stack MERN](Lecture-Code/D15-Starting_FullStack_MERN/)
     - Introduction: Setting up MERN
-    <!-- - `Hello World` -->
     - **CORS** - to connect backend with frontend
     - CREATE & READ Component Setup
         - Display All
         - Display One
 
+- [D16: Full CRUD with ShowApp](Lecture-Code/D16-Full_CRUD_ShowApp/)
+    - Creating the Front End (...continued)
+    - UPDATE
+    - DELETE
 <!--
-- [D16: CRUD in React, Part I](Lecture-Code/D16-CRUD_in_React_I/)
-    - Creating the Front End
-    - Lifted State
-        - Display All vs Display One
 
 - [D17: CRUD in React, Part II](Lecture-Code/D17-CRUD_in_React_II/)
     - Update and Delete
