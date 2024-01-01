@@ -10,6 +10,9 @@
     - Introduction: Setting up MERN
     <!-- - `Hello World` -->
     - **CORS** - to connect backend with frontend
+    - CREATE & READ Component Setup
+        - Display All
+        - Display One
 
 <!--
 - [D16: CRUD in React, Part I](Lecture-Code/D16-CRUD_in_React_I/)
