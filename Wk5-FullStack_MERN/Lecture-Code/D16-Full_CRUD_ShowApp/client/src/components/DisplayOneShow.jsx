@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import EditButton from './styles/EditButton.styled';
 import DeleteButton from './styles/DeleteButton.styled';
 import { formatDate } from '../utils/dateUtils';
 
 const DisplayOneShow = () => {
+    
+    const navigate = useNavigate();
     const { id } = useParams();
     console.log(`=== Show id: ${id} ===`);
     
@@ -21,6 +23,15 @@ const DisplayOneShow = () => {
         .catch(err => console.log(err));
     }, []);
     
+    const deleteHandler = (id) => {
+        axios.delete(`http://localhost:8000/api/show/delete/${id}`)
+            .then((res) => {
+                console.log(res);
+                navigate('/');
+            })
+            .catch( err => console.log(err));
+    }
+    
     return (
         <div className='max-w-md mx-auto'>
             <h2 className='my-5 text-center text-3xl font-serif font-bold'>{ show.title }</h2>
@@ -34,7 +45,9 @@ const DisplayOneShow = () => {
                 <Link to={`/edit/show/${id}`}>
                     <EditButton>Edit Show</EditButton>
                 </Link>
-                <DeleteButton>Delete Show</DeleteButton>
+                <DeleteButton onClick={() => deleteHandler(id)}>
+                    Delete Show
+                </DeleteButton>
             </div>
             
             <hr className='my-5' />

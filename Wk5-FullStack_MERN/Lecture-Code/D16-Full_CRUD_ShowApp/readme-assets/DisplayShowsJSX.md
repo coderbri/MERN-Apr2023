@@ -1,3 +1,4 @@
+```jsx
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -12,6 +13,14 @@ const DisplayShows = ({ tvShowsList, setTvShowsList }) => {
             .then((response) => {
                 console.log(response); // data: { shows: Array(12) [...] }, status: 200,...
                 // console.log(response.data); // * OUTPUT: { shows: Array(12) [ {...}, {...}, {...},... ] }
+                
+                /* Due to the fact the shows are stored into an array
+                    full of a list of objects as { shows: allShows }, 
+                    we need to specify as such: */
+                // console.log(response.data.shows); // * OUTPUT: Array(12) [ { _id: '', title: '...',... }, {...},... ]
+                
+                /* if the allShows object is returned as res.json(allShows),
+                    the data needs to be declared as simply `response.data`. */
                 setTvShowsList(response.data.shows);
                 
             })
@@ -69,3 +78,4 @@ const DisplayShows = ({ tvShowsList, setTvShowsList }) => {
 }
 
 export default DisplayShows;
+```

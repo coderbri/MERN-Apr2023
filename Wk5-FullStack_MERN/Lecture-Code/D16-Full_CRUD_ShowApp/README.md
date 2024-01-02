@@ -14,8 +14,9 @@
   - [1. `DisplayShows.jsx`](#1-displayshowsjsx)
   - [2. `CreateShowForm.jsx`](#2-createshowformjsx)
   - [3. `DisplayOneShow.jsx`](#3-displayoneshowjsx)
-  <!-- ! NEW -->
-  - [4. EditShowForm.jsx](#4-editshowformjsx)
+  - [4. `EditShowForm.jsx`](#4-editshowformjsx)
+  - [Logic in Delete Handler](#logic-in-deletehandler)
+  - [Utility File: `dateUtils.jsx`](#utility-file-dateutilsjsx)
 
 ## Project Initialization
 For the project initialization, refer to the [D13-Server_Setup_w_Mongoose README](../D13-Server_Setup_w_Mongoose/README.md).
@@ -352,3 +353,260 @@ const DisplayOneShow = () => {
 
 
 ### 4. EditShowForm.jsx
+
+#### 1. `useParams` and `useNavigate`
+```jsx
+const { id } = useParams();
+const navigate = useNavigate();
+```
+- `useParams` is a hook from React Router that allows you to access parameters from the current route. In this case, it extracts the `id` parameter from the URL.
+- `useNavigate` is another hook from React Router that provides a function (`navigate`) to programmatically navigate to different routes.
+
+#### 2. `useEffect` for Data Retrieval
+```jsx
+useEffect(() => {
+    axios.get(`http://localhost:8000/api/show/${id}`)
+    .then((res) => {
+        console.log(res);
+        setShow(res.data.show);
+    })
+    .catch(err => console.log(err));
+}, []);
+```
+The `useEffect` hook is used to fetch the data of the show with the specified `id` when the component mounts. It sends a GET request to the backend API endpoint to retrieve the show's details. The retrieved data is then used to update the state (`setShow`) so that the form fields can be pre-populated with the existing data.
+
+#### 3. submitHandler for Update (PUT) Request
+```jsx
+const submitHandler = (e) => {
+    e.preventDefault();
+    
+    axios.put(`http://localhost:8000/api/show/update/${id}`, show)
+        .then((response) => {
+            console.log(response);
+            navigate('/');
+        })
+        .catch((error) => {
+            console.log(error);
+            setErrors(error.response.data.errors);
+        });
+}
+```
+The `submitHandler` function is triggered when the form is submitted to:
+- prevent the default form submission behavior to handle the update logic manually.
+- sends a PUT request to the backend API endpoint to update the show with the specified `id` with the new data from the form.
+- If the update is successful, it logs the response and navigates the user back to the home page (`navigate('/')`).
+- If there are errors, it catches them and updates the state (`setErrors`) to handle error messages.
+
+### Logic in DeleteHandler
+To be able to set up a `deleteHandler`, it will first need to be a child of the <DeleteButton> custom element:
+```jsx
+import React from 'react';
+
+const DeleteButton = ({ children, onClick }) => {
+    return (
+        <button className='font-bold py-2 px-4 rounded 
+            bg-rose-300 text-zinc-600 
+            hover:bg-rose-400 hover:text-zinc-700'
+            onClick={ onClick }
+        >
+            { children }
+        </button>
+    );
+}
+
+export default DeleteButton;
+```
+Above, the styled comonent defines the delete button. It accepts children (text content) and an `onClick` function as props.
+
+#### `DisplayShows.jsx`
+```jsx
+// ... (imports)
+
+const DisplayShows = ({ tvShowsList, setTvShowsList }) => {
+    // ... (useEffect for fetching data)
+
+    const deleteHandler = (id) => {
+        axios.delete(`http://localhost:8000/api/show/delete/${id}`)
+            .then((res) => {
+                console.log(res);
+                const updatedShowList = tvShowsList.filter((show) => show._id !== id);
+                setTvShowsList(updatedShowList);
+            })
+            .catch( err => console.log(err));
+    }
+
+    return (
+        <div className='text-center'>
+            {/* ... */}
+            {
+                tvShowsList.map((show) => (
+                    <div key={show._id} className="pt-4 px-4 rounded-md border-2 border-sky-200">
+                        {/* ... (show details) */}
+                        <div className="mt-5 pb-4 flex justify-center gap-4">
+                            {/* ... (other buttons) */}
+                            <DeleteButton onClick={() => deleteHandler( show._id )}>
+                                Delete
+                            </DeleteButton>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+    );
+}
+
+export default DisplayShows;
+```
+This file contains the `DisplayShows` component. It includes the `deleteHandler` function, which is called when the delete button is clicked. The `deleteHandler` sends a DELETE request to the backend API to delete the show with the specified `id`. If the deletion is successful, it updates the state (`setTvShowsList`) to remove the deleted show from the list.
+
+#### `DisplayOneShow.jsx`
+```jsx
+// ... (imports)
+
+const DisplayOneShow = () => {
+    // ... (useParams, useState, useEffect)
+
+    const deleteHandler = (id) => {
+        axios.delete(`http://localhost:8000/api/show/delete/${id}`)
+            .then((res) => {
+                console.log(res);
+                navigate('/');
+            })
+            .catch( err => console.log(err));
+    }
+
+    return (
+        <div className='max-w-md mx-auto'>
+            {/* ... (show details) */}
+            <div className="flex justify-center gap-4">
+                <Link to={`/edit/show/${id}`}>
+                    <EditButton>Edit Show</EditButton>
+                </Link>
+                <DeleteButton onClick={() => deleteHandler(id)}>
+                    Delete Show
+                </DeleteButton>
+            </div>
+            {/* ... */}
+        </div>
+    );
+}
+
+export default DisplayOneShow;
+```
+The `DisplayOneShow` component includes a `deleteHandler` function similar to the one in `DisplayShows`. When the delete button is clicked, it sends a DELETE request to the backend API to delete the show with the specified `id`. If the deletion is successful, it uses `navigate('/')` from `useNavigate` to navigate the user back to the home page.
+
+
+### Utility File: `dateUtils.jsx`
+
+#### Modularization
+
+The `dateUtils.jsx` file is located in the `src/utils` directory, where the file structure would look like this:
+
+```plaintext
+src
+|-- utils
+|   |-- dateUtils.jsx
+|-- components
+|   |-- DisplayOneShow.jsx
+|   |-- EditShowForm.jsx
+|-- App.jsx
+|-- ... (other files and directories)
+```
+
+In `dateUtils.jsx`, the `formatDate` function is exported using `export const`:
+
+```jsx
+export const formatDate = (timestamp) => {
+    const options = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+    };
+    const formattedDate = new Date(timestamp).toLocaleDateString('en-US', options);
+    return formattedDate;
+};
+```
+
+In `DisplayOneShow.jsx`, the `formatDate` function is imported from `dateUtils.jsx` and used to format the creation and update timestamps. Similarly, in `EditShowForm.jsx`, the `formatDate` function is imported from `dateUtils.jsx` and used to display the last edit timestamp:
+
+#### Utilization in `DisplayOneShow.jsx`:
+
+```jsx
+// src/components/DisplayOneShow.jsx
+
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import EditButton from './styles/EditButton.styled';
+import DeleteButton from './styles/DeleteButton.styled';
+import { formatDate } from '../utils/dateUtils';  // Importing the formatDate function
+
+const DisplayOneShow = () => {
+    // ... (omitting unchanged code for brevity)
+
+    return (
+        <div className='max-w-md mx-auto'>
+            {/* ... (omitting unchanged code for brevity) */}
+            
+            <hr className='my-5' />
+            <div className="flex justify-between text-gray-500 text-sm">
+                <p>{ formatDate(show.createdAt) }</p>
+                { show.createdAt !== show.updatedAt && <p>{formatDate(show.updatedAt)} (edited)</p> }
+            </div>
+        </div>
+    );
+}
+
+export default DisplayOneShow;
+```
+
+#### Utilization in `EditShowForm.jsx`: 
+
+```jsx
+// src/components/EditShowForm.jsx
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import { formatDate } from '../utils/dateUtils';  // Importing the formatDate function
+
+const EditShowForm = () => {
+    // ... (omitting unchanged code for brevity)
+    
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/show/${id}`)
+        .then((res) => {
+            console.log("Show data loading...");
+            console.log(res);
+            setShow(res.data.show);
+            console.log("Show data loaded!")
+        })
+        .catch(err => console.log(err));
+    }, []);
+
+    return (
+        <div className='max-w-md mx-auto'>
+            {/* ... (omitting unchanged code for brevity) */}
+            
+            <hr className='my-5' />
+            <div className="text-gray-500 text-sm">
+                { show.createdAt !== show.updatedAt && <p>{formatDate(show.updatedAt)} (edited)</p> }
+            </div>
+            
+        </div>
+    );
+}
+
+export default EditShowForm;
+```
+
+#### Conditional Rendering of `updatedAt` Timestamp
+```jsx
+{ show.createdAt !== show.updatedAt && <p>{formatDate(show.updatedAt)} (edited)</p> }
+```
+1. This line is a conditional rendering in JSX, where this condition (`show.createdAt !== show.updatedAt`) checks whether the creation timestamp (createdAt) is not equal to the update timestamp (updatedAt). In other words, it checks if the show has been edited.
+2. If the condition is true, the content in the <p> element (`{formatDate(show.updatedAt)}`) will call the imported `formatDate` function to display the formatted date when the show was last updated.
+3.  This line checks if the show has been edited, and if not, nothing is rendered in this part of the component.
