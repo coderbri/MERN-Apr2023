@@ -1,6 +1,6 @@
 # Week 5: Full-Stack MERN
 
-２０２３年１２月２７日（水）ー ２０２３年１２月＿日（＿）
+２０２３年１２月２７日（水）ー ２０２４年０１月＿日（＿）
 
 ## Topics Covered
 
@@ -15,10 +15,11 @@
 
 - [D16: Full CRUD with ShowApp](Lecture-Code/D16-Full_CRUD_ShowApp/)
     - Creating the Front End (...continued)
-    - UPDATE
-    - DELETE
-<!--
+        - UPDATE & DELETE
+    - Reusing Components
+    - Presentational vs Container
 
+<!--
 - [D17: CRUD in React, Part II](Lecture-Code/D17-CRUD_in_React_II/)
     - Update and Delete
 
