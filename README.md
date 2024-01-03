@@ -42,6 +42,6 @@ Course Taken: ２０２３年０４月
     ---
 
 - **Full-Stack MERN**
-    - [#023: Product Manager - Part I](#)
-    - [#024: Product Manager - Part II](#)
-    - [#025: Product Manager - Part III](#)
+    - [#023: Product Manager - Part I](Wk5-FullStack_MERN/023-Product_Manager/)
+    <!-- - [#024: Product Manager - Part II](#) -->
+    <!-- - [#025: Product Manager - Part III](#) -->
