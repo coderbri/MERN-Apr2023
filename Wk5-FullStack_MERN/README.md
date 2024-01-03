@@ -9,6 +9,7 @@
 - [D15: Starting Full-Stack MERN](Lecture-Code/D15-Starting_FullStack_MERN/)
     - Introduction: Setting up MERN
     - **CORS** - to connect backend with frontend
+    - Implementing Lifting State
     - CREATE & READ Component Setup
         - Display All
         - Display One
@@ -19,9 +20,9 @@
     - Reusing Components
     - Presentational vs Container
 
+- [D17: Full-Stack AlbumApp](Lecture-Code/D17-FullStack_AlbumApp/)
+    - Starting another Full-Stack Project
 <!--
-- [D17: CRUD in React, Part II](Lecture-Code/D17-CRUD_in_React_II/)
-    - Update and Delete
 
 - [D18: CRUD in React, Part III](Lecture-Code/D18-CRUD_in_React_III/)
     - Reusing Components
