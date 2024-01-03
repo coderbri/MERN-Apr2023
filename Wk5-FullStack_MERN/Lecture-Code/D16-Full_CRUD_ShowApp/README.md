@@ -19,7 +19,7 @@
   - [Utility File: `dateUtils.jsx`](#utility-file-dateutilsjsx)
 
 ## Project Initialization
-For the project initialization, refer to the [D13-Server_Setup_w_Mongoose README](../D13-Server_Setup_w_Mongoose/README.md).
+For the project initialization, refer to the [D13-Server_Setup_w_Mongoose README](https://github.com/coderbri/MERN-Apr2023/blob/c09996835266cb9b75a5ff14c097fe49472fdf13/Wk4-Backend_Development/Lecture-Code/D13-Server_Setup_w_Mongoose/README.md).
 
 ## Tailwind CSS Installation and Usage in a Vite React Project
 To incorporate Tailwind CSS into a Vite React project, access the official Tailwind CSS documentation guide for Vite by visiting [Tailwind CSS - Vite](https://tailwindcss.com/docs/guides/vite).
