@@ -15,6 +15,8 @@ const DisplayProducts = ({ productList, setProductList }) => {
             .catch((err) => console.log(err));
     }, []);
     
+    const deleteHandler = (id) => {}
+    
     return (
         <div>
             <h2 className='text-3xl font-bold text-center'>All Products</h2>
@@ -33,7 +35,7 @@ const DisplayProducts = ({ productList, setProductList }) => {
                                 <Button>View</Button>
                             </Link>
                             <EditButton>Edit</EditButton>
-                            <DeleteButton>Delete</DeleteButton>
+                            <DeleteButton onClick={() => deleteHandler(product._id)}>Delete</DeleteButton>
                         </div>
                     </div>
                 ))
