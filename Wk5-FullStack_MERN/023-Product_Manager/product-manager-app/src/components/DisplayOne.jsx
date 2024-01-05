@@ -4,6 +4,7 @@ import axios from 'axios'
 import EditButton from './styles/EditButton.styled';
 import DeleteButton from './styles/DeleteButton.styled';
 import { formatDate } from "../utils/dateUtils"
+import { formatPrice } from '../utils/formaPriceUtils';
 
 const DisplayOne = () => {
     const { id } = useParams();
@@ -19,13 +20,22 @@ const DisplayOne = () => {
             .catch((err) => console.log(err));
     }, []);
     
-    const deleteHandler = (id) => {}
+    const deleteHandler = (id) => {
+        axios.delete(`http://localhost:8000/api/product/delete/${id}`)
+            .then((res) => {
+                console.log(res);
+                navigate('/');
+            })
+            .catch(err => console.log(err));
+    }
     
     return (
         <div className='max-w-md mx-auto'>
-            <h2 className='text-3xl font-bold text-center'>{ product.productName }</h2>
+            <h2 className='text-3xl font-bold text-center my-3'>{ product.productName }</h2>
             <div className="mt-2">
-                <p><span className='font-semibold'>Price: </span>${ product.productPrice }</p>
+                { product.productPrice && (
+                    <p><span className='font-semibold'>Price: </span>${ formatPrice(product.productPrice) }</p>
+                )}
                 <p><span className='font-semibold'>Description: </span>{ product.productDescription }</p>
             </div>
             
@@ -35,9 +45,7 @@ const DisplayOne = () => {
                 <Link to={`/product/edit-details/${id}`}>
                     <EditButton>Edit Product</EditButton>
                 </Link>
-                <DeleteButton onClick={() => deleteHandler(id)}>
-                    Delete Product
-                </DeleteButton>
+                <DeleteButton onClick={() => deleteHandler(id)}>Delete Product</DeleteButton>
             </div>
             
             <hr className='my-5' />

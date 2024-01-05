@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import DeleteButton from './styles/DeleteButton.styled';
-import EditButton from './styles/EditButton.styled';
 import Button from './styles/Button.styled';
+import EditButton from './styles/EditButton.styled';
+import DeleteButton from './styles/DeleteButton.styled';
+import { formatPrice } from '../utils/formaPriceUtils';
 
 const DisplayProducts = ({ productList, setProductList }) => {
     useEffect(() => {
@@ -15,7 +16,15 @@ const DisplayProducts = ({ productList, setProductList }) => {
             .catch((err) => console.log(err));
     }, []);
     
-    const deleteHandler = (id) => {}
+    const deleteHandler = (id) => {
+        axios.delete(`http://localhost:8000/api/product/delete/${id}`)
+            .then((res) => {
+                console.log(res);
+                const updatedProductList = productList.filter((product) => product._id !== id)
+                setProductList(updatedProductList);
+            })
+            .catch(err => console.log(err));
+    }
     
     return (
         <div>
@@ -29,8 +38,8 @@ const DisplayProducts = ({ productList, setProductList }) => {
                             dark:border-zinc-700 dark:bg-zinc-800
                             light:border-slate-300 bg-slate-50'
                     >
-                        <h3 className="text-xl font-semibold">{ product.productName }</h3>
-                        <p className='font-serif font-medium'>${ product.productPrice }</p>
+                        <h3 className="text-xl font-semibold font-serif">{ product.productName }</h3>
+                        { product.productPrice && ( <p>${ formatPrice(product.productPrice) }</p> )}
                         <div className="mt-5 flex justify-center gap-4">
                             <Link to={`/product/details/${product._id}`}>
                                 <Button>View</Button>
