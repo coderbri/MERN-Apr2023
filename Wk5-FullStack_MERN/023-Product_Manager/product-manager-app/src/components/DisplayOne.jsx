@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import axios from 'axios'
-import DeleteButton from './styles/DeleteButton.styled';
 import EditButton from './styles/EditButton.styled';
+import DeleteButton from './styles/DeleteButton.styled';
 import { formatDate } from "../utils/dateUtils"
 
 const DisplayOne = () => {
-    const navigate = useNavigate();
     const { id } = useParams();
+    const navigate = useNavigate();
     
     const [ product, setProduct ] = useState({});
     useEffect(() => {

@@ -14,7 +14,7 @@ function App() {
       <BrowserRouter>
         
         <HeaderStyled>
-          <h1 className='text-3xl font-bold font-serif text-indigo-300'>
+          <h1 className='text-3xl font-bold font-serif text-indigo-400 dark:text-indigo-300'>
             <a href="/">23 Product Manager</a>
           </h1>
           <nav className='flex justify-center items-center gap-4 mt-4 sm:mt-0'>

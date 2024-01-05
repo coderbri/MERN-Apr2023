@@ -26,10 +26,11 @@ const DisplayProducts = ({ productList, setProductList }) => {
                     <div key={product._id}
                         className='p-4 rounded-md border-2 
                             text-center
-                            border-zinc-700 bg-zinc-800'
+                            dark:border-zinc-700 dark:bg-zinc-800
+                            light:border-slate-300 bg-slate-50'
                     >
                         <h3 className="text-xl font-semibold">{ product.productName }</h3>
-                        <p className='font-serif'>${ product.productPrice }</p>
+                        <p className='font-serif font-medium'>${ product.productPrice }</p>
                         <div className="mt-5 flex justify-center gap-4">
                             <Link to={`/product/details/${product._id}`}>
                                 <Button>View</Button>
