@@ -312,6 +312,58 @@ const submitHandler = (e) => {
 
 ### UpdateProductForm.jsx
 
+This component resemebles the [CreateProductForm.jsx](#createproductformjsx) but will instead preload the product's existing data and update via PUT request.
+
+#### 1. `useParams` and `useNavigate`
+```jsx
+const { id } = useParams();
+const navigate = useNavigate();
+```
+- **`useParams`** is a hook from React Router that allows access to parameters from the current route. In this case, it extracts the `id` paramter from the URL.
+
+- **`useNavigate`** is another hook from React Router that provides a function (`navigate`) to programmatically navigate back to the homepage.
+
+#### 2. `useEffect` for Data Retrieval
+```jsx
+useEffect(() => {
+    axios.get(`http://localhost:8000/api/product/${id}`)
+        .then((res) => {
+            console.log("Loading product data...", res);
+            setProductItem(res.data);
+            console.log("Product data loaded!");
+        })
+        .catch(err => console.log(err));
+}, []);
+```
+Similarily to the [DisplayOne](#displayonejsx) component, the `useEffect` hook is used to fetch the data of the show with the specified `id` when the component mounts. It sends a GET request to the backend API endpoint to retrieve the product's details. The retrieved data is then used to update the state (`setProductItem`) so that the form fields can be pre-populated with the existing data.
+
+#### 3. `submitHandler` for Update (PUT) Request
+
+```jsx
+const submitHandler = (e) => {
+    e.preventDefault();
+    console.log("Data to be sent:", productItem);
+    axios.put(`http://localhost:8000/api/product/update/${id}`, productItem)
+        .then((res) => {
+            console.log(res);
+            navigate('/');
+        })
+        .catch((err) => {
+            console.log(err.response.data);
+            setErrors(err.response.data.errors);
+        });
+}
+```
+The `submitHandler` function is triggered when the form is submitted to:
+- prevent the default form submission behaviour to handle the update logic manually.
+- sends a PUT request to the backend API endpoint to update the show with the specified `id` when the new data from the form.
+- If the update si successful, it logs the response and navigate the user back to the homepage (`navigate('/')`).
+
+### `deleteHandler` Logic in `DisplayProducts.jsx` and `DisplayOne.jsx`
+
+To be able to setup a deleteHandler, it will first need to be a child of the custom element:
+<!-- ```jsx
+``` -->
 
 ---
-<p align="right">Completed: ２０２４年０１月０１日（月）</p>
+<p align="right">Completed: ２０２４年０１月０＿日（＿）</p>

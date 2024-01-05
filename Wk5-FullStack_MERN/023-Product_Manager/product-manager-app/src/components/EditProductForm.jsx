@@ -1,44 +1,53 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Button from './styles/Button.styled';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
+import { formatDate } from '../utils/dateUtils';
+import Button from './styles/Button.styled';
 
-const CreateProductForm = () => {
+const EditProductForm = () => {
+    
+    const { id } = useParams();
+    const navigate = useNavigate();
     
     const [ productItem, setProductItem ] = useState({
         productName: '',
         productPrice: 0.99,
         productDescription: '',
     });
-    const [ errors, setErrors ]= useState({});
-    const navigate = useNavigate();
+    const [ errors, setErrors ] = useState({});
+    
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/product/${id}`)
+            .then((res) => {
+                console.log("Loading product data...", res);
+                setProductItem(res.data);
+                console.log("Product data loaded!");
+            })
+            .catch(err => console.log(err));
+    }, []);
     
     const changeHandler = (e) => {
         setProductItem({ ...productItem, [e.target.name]:e.target.value });
     }
-    
     const submitHandler = (e) => {
         e.preventDefault();
-        
         console.log("Data to be sent:", productItem);
-        // console.log(`This is the new show: ${JSON.stringify(productItem)}`);
-        axios.post('http://localhost:8000/api/product/new', productItem)
+        axios.put(`http://localhost:8000/api/product/update/${id}`, productItem)
             .then((res) => {
                 console.log(res);
                 navigate('/');
             })
             .catch((err) => {
-                console.log(err.response.data.errors);
+                console.log(err.response.data);
                 setErrors(err.response.data.errors);
             });
     }
     
     return (
         <div className='max-w-md mx-auto'>
-            <h2 className="text-center text-3xl font-bold my-3">Add a New Product!</h2>
+            <h2 className="text-center text-3xl font-bold my-3">Edit Product Details</h2>
             
             <form onSubmit={submitHandler}>
-                
                 <div className='mb-5'>
                     <label className='block mb-2 text-sm font-semibold text-zinc-900 dark:text-white'>Name</label>
                     <div>
@@ -87,12 +96,18 @@ const CreateProductForm = () => {
                     }
                 </div>
                 
-                <div>
-                    <Button><input type="submit" value="Create Product" /></Button>
+                <div className='flex justify-between items-center gap-4'>
+                    <Button><input type="submit" value="Edit Product" /></Button>
+                    <Link to={"/"} className='me-5'>Go Back to Home</Link>
                 </div>
             </form>
+            
+            <hr className="my-5" />
+            <div className="text-zinc-500 text-sm">
+                { productItem.createdAt !== productItem.updatedAt && <p>{formatDate(productItem.updatedAt)} (edited)</p> }
+            </div>
         </div>
     );
 }
 
-export default CreateProductForm;
+export default EditProductForm;

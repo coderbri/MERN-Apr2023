@@ -5,6 +5,7 @@ import DisplayOne from './components/DisplayOne';
 import HeaderStyled from './components/styles/Header.styled'
 import Button from './components/styles/Button.styled';
 import CreateProductForm from './components/CreateProductForm';
+import EditProductForm from './components/EditProductForm';
 
 function App() {
   const [ products, setProducts ] = useState([]);
@@ -29,6 +30,7 @@ function App() {
             <Route path={"/"} element={<DisplayProducts productList={products} setProductList={setProducts} />} />
             <Route path={"/product/details/:id"} element={<DisplayOne />} />
             <Route path={"/product/create-new"} element={<CreateProductForm />} />
+            <Route path={"/product/edit-details/:id"} element={<EditProductForm />} />
             
           </Routes>
         </div>

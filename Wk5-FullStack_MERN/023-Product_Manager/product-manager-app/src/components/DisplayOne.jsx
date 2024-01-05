@@ -32,9 +32,9 @@ const DisplayOne = () => {
             <h3 className="text-xl text-center font-bold my-4">Product Actions</h3>
             <div className="flex justify-center items-center gap-4">
                 <Link to={"/"} className='me-5'>Go Back</Link>
+                <Link to={`/product/edit-details/${id}`}>
                     <EditButton>Edit Product</EditButton>
-                {/* <Link to={`/edit/show/${id}`}>
-                </Link> */}
+                </Link>
                 <DeleteButton onClick={() => deleteHandler(id)}>
                     Delete Product
                 </DeleteButton>

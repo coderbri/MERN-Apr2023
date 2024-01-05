@@ -35,7 +35,9 @@ const DisplayProducts = ({ productList, setProductList }) => {
                             <Link to={`/product/details/${product._id}`}>
                                 <Button>View</Button>
                             </Link>
-                            <EditButton>Edit</EditButton>
+                            <Link to={`/product/edit-details/${product._id}`}>
+                                <EditButton>Edit</EditButton>
+                            </Link>
                             <DeleteButton onClick={() => deleteHandler(product._id)}>Delete</DeleteButton>
                         </div>
                     </div>
