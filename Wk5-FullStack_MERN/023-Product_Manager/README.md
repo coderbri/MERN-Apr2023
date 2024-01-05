@@ -263,24 +263,7 @@ const CreateProductForm = () => {
 ```jsx
 // ...
 const changeHandler = (e) => {
-    setShow({ ...show, [e.target.name]: e.target.value });
-}
-
-const submitHandler = (e) => {
-    e.preventDefault();
-    
-    console.log("Data to be sent:", productItem);
-    console.log(`This is the new show: ${JSON.stringify(productItem)}`);
-    
-    axios.post('http://localhost:8000/api/product/new', productItem)
-        .then((res) => {
-            console.log(res);
-            navigate('/');
-        })
-        .catch((err) => {
-            console.log(err);
-            // ! setErrors
-        });
+    setProductItem({ ...productItem, [e.target.name]:e.target.value });
 }
 ```
 
@@ -291,15 +274,16 @@ const submitHandler = (e) => {
 ```jsx
 const submitHandler = (e) => {
     e.preventDefault();
-    // ... (omitting console logs for brevity)
-    axios.post('http://localhost:8000/api/show/new', show)
-        .then((response) => {
-            console.log(response);
+    
+    console.log("Data to be sent:", productItem);
+    axios.post('http://localhost:8000/api/product/new', productItem)
+        .then((res) => {
+            console.log(res);
             navigate('/');
         })
-        .catch((error) => {
-            console.log(error);
-            setErrors(error.response.data.errors);
+        .catch((err) => {
+            console.log(err.response.data.errors);
+            setErrors(err.response.data.errors);
         });
 }
 ```
@@ -308,8 +292,7 @@ const submitHandler = (e) => {
 
 2. **axios.post:** It uses `axios.post` to send a POST request to the backend API endpoint (`http://localhost:8000/api/show/new`). The `show` object is sent in the request body.
 
-3. **Navigation:**
-   - Upon successful submission, it logs the response and uses the `navigate` function to navigate back to the home page (`'/'`).
+3. **Navigation:** Upon successful submission, it logs the response and uses the `navigate` function to navigate back to the home page (`'/'`).
 
 4. **Error Handling:** If there's an error, it logs the error and sets the `errors` state with the error messages received from the backend.
 
