@@ -21,17 +21,12 @@ const DisplayAlbums = ({ albumList, setAlbumList }) => {
             <h2 className='text-3xl font-bold text-center'>All Albums</h2>
             <div className='mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
                 { albumList.map((album) => (
-                    <div key={album._id} className='
-                        border border-zinc-800 rounded-lg
-                        bg-zinc-800
-                        p-4 
-                    '>
+                    <div key={album._id} className='p-4 rounded-lg bg-zinc-800'>
                         <p>test</p>
                         <hr />
                         <div className="mt-3 flex flex-col align-bottom">
-                            <Link to={`/album/${album._id}/view`} className="
+                            <Link to={`/album/${album._id}/view`} className="ease-out duration-200
                                 hover:text-emerald-300 hover:font-extrabold 
-                                ease-out duration-200
                             ">
                                 <h3 className='font-semibold'>{ album.albumName }</h3>
                             </Link>
