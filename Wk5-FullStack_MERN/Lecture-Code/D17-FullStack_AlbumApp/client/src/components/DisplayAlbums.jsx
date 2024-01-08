@@ -24,16 +24,17 @@ const DisplayAlbums = ({ albumList, setAlbumList }) => {
                     <div key={album._id} className='p-4 rounded-lg bg-zinc-800'>
                         <p>test</p>
                         <hr />
-                        <div className="mt-3 flex flex-col align-bottom">
+                        <div className="mt-3 flex flex-col align-bottom truncate">
                             <Link to={`/album/${album._id}/view`} className="ease-out duration-200
-                                hover:text-emerald-300 hover:font-extrabold 
-                            ">
+                                hover:text-emerald-300 hover:font-extrabold">
                                 <h3 className='font-semibold'>{ album.albumName }</h3>
                             </Link>
                             <p className='text-zinc-500 font-medium'>{ album.artist }</p>
                             <div className="flex justify-end">
                                 <div className="flex items-center gap-3">
-                                    <EditButton />
+                                    <Link to={`/album/${album._id}/edit`}>
+                                        <EditButton />
+                                    </Link>
                                     <DeleteButton />
                                 </div>
                             </div>

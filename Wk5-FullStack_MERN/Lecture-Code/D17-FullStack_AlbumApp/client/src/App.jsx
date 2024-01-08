@@ -5,6 +5,7 @@ import AddButtonStyled from './components/styles/AddButton.styled';
 import DisplayAlbums from './components/DisplayAlbums'
 import DisplayOneAlbum from './components/DisplayOneAlbum';
 import CreateAlbumForm from './components/CreateAlbumForm';
+import EditAlbumForm from './components/EditAlbumForm';
 
 function App() {
   const [ albumCollection, setAlbumCollection ] = useState([]);
@@ -25,7 +26,7 @@ function App() {
           <Route path={"/"} element={<DisplayAlbums albumList={albumCollection} setAlbumList={setAlbumCollection} />} />
           <Route path={"/album/:id/view"} element={<DisplayOneAlbum />} />
           <Route path={"/album/create"} element={<CreateAlbumForm />} />
-          
+          <Route path={"/album/:id/edit"} element={<EditAlbumForm />} />
         </Routes>
       </div>
     </>
