@@ -1,8 +1,8 @@
 import React from 'react';
 
-const DeleteButton = () => {
+const DeleteButton = ({ onClick }) => {
     return (
-        <button className='p-2 rounded-2xl
+        <button onClick={onClick} className='p-2 rounded-2xl
             bg-zinc-800 hover:bg-zinc-600
             ease-out duration-300
         '>

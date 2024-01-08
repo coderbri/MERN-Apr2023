@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import EditButton from './styles/EditButton';
 import DeleteButton from './styles/DeleteButton';
 import { formatDate } from '../utils/dateUtils';
@@ -8,6 +8,7 @@ import { formatDate } from '../utils/dateUtils';
 const DisplayOneAlbum = () => {
     const [ albumDetails, setAlbumDetails ] = useState({});
     const { id } = useParams();
+    const navigate = useNavigate();
     
     useEffect(() => {
         axios.get(`http://localhost:8000/api/album/${id}`)
@@ -18,7 +19,14 @@ const DisplayOneAlbum = () => {
             .catch((err) => console.log(err));
     }, []);
     
-    const deleteHandler = (id) => {}
+    const deleteHandler = (id) => {
+        axios.delete(`http://localhost:8000/api/album/delete/${id}`)
+            .then((res) => {
+                console.log("=== Album deleted!", res);
+                navigate("/");
+            })
+            .catch(err => console.log(err));
+    }
     
     return (
         <div className='max-w-2xl mx-auto'>
@@ -38,7 +46,7 @@ const DisplayOneAlbum = () => {
                         <Link to={`/album/${id}/edit`}>
                             <EditButton />
                         </Link>
-                        <DeleteButton />
+                        <DeleteButton onClick={() => deleteHandler(id)} />
                     </div>
                     <hr className='my-5' />
                     <div className="flex justify-between text-zinc-500 text-sm">

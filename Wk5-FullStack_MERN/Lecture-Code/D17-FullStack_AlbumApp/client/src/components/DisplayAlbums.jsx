@@ -14,7 +14,15 @@ const DisplayAlbums = ({ albumList, setAlbumList }) => {
             .catch((err) => console.log(err));
     }, []);
     
-    const deleteHandler = (id) => {};
+    const deleteHandler = (id) => {
+        axios.delete(`http://localhost:8000/api/album/delete/${id}`)
+            .then((res) => {
+                console.log(res);
+                const updatedAlbumList = albumList.filter((album) => album._id !== id);
+                setAlbumList(updatedAlbumList);
+            })
+            .catch(err => console.log(err.response));
+    };
     
     return (
         <div>
@@ -35,7 +43,7 @@ const DisplayAlbums = ({ albumList, setAlbumList }) => {
                                     <Link to={`/album/${album._id}/edit`}>
                                         <EditButton />
                                     </Link>
-                                    <DeleteButton />
+                                    <DeleteButton onClick={() => deleteHandler(album._id)} />
                                 </div>
                             </div>
                         </div>
