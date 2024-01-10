@@ -221,6 +221,7 @@ This component serves as the main structure of the application, managing the ove
 
 4. **Component Route**: Contains the components that will display the relevant album data as well as pass the necessary the album state and the function to update it as props.
 
+
 ### `DisplayAlbums.jsx`
 
 <div align="center">
@@ -376,12 +377,81 @@ const DisplayOneAlbum = () => {
 3. **Album Actions**: Buttons for editing and deleting the product are displayed. These buttons are styled using imported styled components.
 
 
-
-### `CreateAlbumForm.jsx` _wip_
+### `CreateAlbumForm.jsx`
 
 <div align="center">
-<img src="" width="450px" height="auto">
+<img src="./readme-assets/AlbumApp-CreateAlbum.png" width="450px" height="auto">
 </div>
+
+This component is a form for creating a new album entry. It uses local state to manage the details of the new album and form validation errors. Input fields are controlled components, and changes trigger the `changeHandler` function to update the state. On form submission, it sends a POST request to the backend API to add the new album. There, it handles errors by displaying error messages (from the backend) below the corresponding input fields. Upon successful submission, it uses programmatic navigation to go back to the home page.
+
+#### Imports
+```javascript
+import axios from 'axios';
+import React, { useState } from 'react';
+import ButtonStyled from './styles/Button.styled';
+import { useNavigate } from 'react-router-dom';
+```
+1. **React and `useState`**: The component is built using React and it uses the `useState` hook to locally manage the new album’s state.
+
+2. **`axios`**: This library is imported to make an HTTP request to send data to the backend API via POST.
+
+3. **`useNavigate`**: This hook from `‘react-router-dom’` is used to navigate the user from the form view to the homepage after successful album creation.
+
+#### Form State and Event Handlers
+```javascript
+const [ album, setAlbum ] = useState({
+	albumName: "",
+	artist: "",
+	releaseYear: 1920,
+	genre: "",
+	explicit: false
+})
+const [ errors, setErrors ] = useState({});
+```
+
+1. **Local State Management:** The component uses the `useState` hook to manage local state in the following matter: (1) It initializes the state with an object representing the details of an album, and (2) an object for tracking form validation errors.
+
+2. **Change Handler:** This function handles changes in form inputs. It updates the state by spreading the existing album object and setting the specified property (`[e.target.name]`) to the new value (`e.target.value`).
+    ```javascript
+    const changeHandler = (e) => {
+            const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+            setAlbum({ ...album, [e.target.name]: value });
+        };
+    ```
+
+3. **Submit Handler**: This function is triggered when the form is submitted. It first prevents the default form submission behavior (`e.preventDefault()`). 
+    ```javascript
+    const navigate = useNavigate('/');
+    const submitHandler = (e) => {
+            e.preventDefault();
+            axios.post(`http://localhost:8000/api/album/new`, album)
+                .then((res) => {
+                    console.log("Album created:", res);
+                    navigate('/');
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setErrors(err.response.data.errors);
+                });
+        }
+    ```
+   1. The `axios` library is then used to make a POST request to the backend API endpoint ([http://localhost:8000/api/album/new](http://localhost:8000/api/album/new)). The `album` object is sent in the request body.
+   
+   2. Upon successful submission the response is logged and uses the navigate function to navigate back to the home page ('/').
+   
+   3. If there's an error, it logs the error and sets the errors state with the error messages received from the backend.
+
+#### Form Rendering
+1. **Form Structure**: The component returns JSX that renders a form with input fields for the user to input details of an album.
+
+2. **Input Fields**: Each input field has a corresponding label and is controlled by state. The `onChange` event triggers the `changeHandler` function to update the state.
+
+3. **Error Handling**: If there are errors for a specific field, it displays an error message below the corresponding input field.
+
+4. **Submit Button**: The form has a submit button, and on submission, it triggers the `submitHandler` function.
+
+
 
 ### `EditAlbumForm.jsx` _wip_
 
