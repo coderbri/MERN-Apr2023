@@ -9,7 +9,12 @@
 - [Project Initialization](#project-initialization)
 - [Tailwind CSS Installation and Usage in a Vite React Project](#tailwind-css-installation-and-usage-in-a-vite-react-project)
 - [AlbumApp Components](#albumapp-components)
+    - [`App.jsx`](#appjsx)
     - [`DisplayAlbums.jsx`](#displayalbumsjsx)
+    - [`DisplayOneAlbum.jsx`](#displayonealbumjsx)
+    - [`CreateAlbumForm.jsx`](#createalbumformjsx)
+    - [`EditAlbumForm.jsx`](#editalbumformjsx)
+    - [Logic in `deleteHandler`](#logic-in-deletehandler)
 
 ## Project Initialization
 For the project initialization, refer to the [D13-Server_Setup_w_Mongoose README](https://github.com/coderbri/MERN-Apr2023/blob/c09996835266cb9b75a5ff14c097fe49472fdf13/Wk4-Backend_Development/Lecture-Code/D13-Server_Setup_w_Mongoose/README.md) and for CORS implementation, go to this [project's README.md](https://github.com/coderbri/MERN-Apr2023/blob/f6efeda0fac558bd4b411f3d18c5a3ced068b783/Wk5-FullStack_MERN/Lecture-Code/D16-Full_CRUD_ShowApp/README.md).
@@ -453,10 +458,87 @@ const [ errors, setErrors ] = useState({});
 
 
 
-### `EditAlbumForm.jsx` _wip_
+### `EditAlbumForm.jsx`
 
 <div align="center">
-<img src="" width="450px" height="auto">
+<img src="./readme-assets/AlbumApp-Update.png" width="450px" height="auto">
 </div>
 
-### Delete Handler _wip_
+This component resembles the `CreateAlbumForm.jsx` but will instead preload the album’s existing data to update via PUT request.
+
+#### Component Setup
+1. **`useParams` and `useNavigate`**: 
+   ```javascript
+   const { id } = useParams();
+   const navigate = useNavigate();
+   ```
+   - `useParams` is a hook from React Router that allows access to parameters from the current route. In this case, it extracts the `id` parameter from the URL.
+   * `useNavigate` is another hook from React Router that provides a function to navigate back to the homepage.
+
+2. **`useEffect` for Data Retrieval**: Similarly to the DisplayOneAlbum component, the `useEffect` hook is used to fetch the data of the album with the specified `id` when the component mounts. It sends a GET request to the backend API endpoint to retrieve the album’s details. The retrieved data is then used to update the state (`setAlbum`) so that the form fields can be pre-populated with the existing data.
+   ```javascript
+   useEffect(() => {
+        axios.get(`http://localhost:8000/api/album/${id}`)
+            .then((res) => {
+                console.log("Album data uploaded", res);
+                setAlbum(res.data);
+            })
+            .catch((err) =>  console.log(err));
+    }, []);
+   ```
+
+3. **`submitHandler` for Update (PUT) Request**: This function is triggered when the form is submitted and will do the following:
+   * prevent the default form submission behavior to handle the update logic manually.
+   * sends a PUT request to the backend API endpoint to update the album with the specified id when the new data from the form.
+   * If the update is successful, it logs the response and navigate the user back to the homepage (`navigate('/')`).
+   ```javascript
+   const submitHandler = (e) => {
+        e.preventDefault();
+        axios.put(`http://localhost:8000/api/album/update/${id}`, album)
+            .then((res) => {
+                console.log("Data being sent:", res);
+                navigate('/');
+            })
+            .catch((err) => {
+                console.log("=== ERRORS DETECTED!", err.response.data);
+                setErrors(err.response.data.errors);
+            });
+    }
+   ```
+
+
+### Logic in `deleteHandler`
+To be able to setup a `deleteHandler`, it will first need to be a child of the custom element:
+```javascript
+import React from 'react';
+
+const DeleteButton = ({ onClick }) => {
+    return (
+        <button onClick={onClick} className='p-2 rounded-2xl bg-zinc-800 hover:bg-zinc-600 ease-out duration-300'>
+            <svg>{/* <path ...></path> */}</svg>
+        </button>
+    );
+}
+
+export default DeleteButton;
+```
+Above, the styled component defines the delete button. It accepts an `onClick` function as the props.
+
+#### Application in `DisplayAlbums.jsx`
+```javascript
+const deleteHandler = (id) => {
+        axios.delete(`http://localhost:8000/api/album/delete/${id}`)
+            .then((res) => {
+                console.log(res);
+                const updatedAlbumList = albumList.filter((album) => album._id !== id);
+                setAlbumList(updatedAlbumList);
+            })
+            .catch(err => console.log(err.response));
+    };
+```
+
+1. **Axios Delete Request**: Upon the button being clicked, it makes a DELETE request to the server API endpoint (http://localhost:8000/api/album/delete/:id) with the `album._id` as a parameter. This endpoint will then handle the deletion of the specific album.
+
+2. **Updating State**: Upon a successful deletion (resolved promise), it logs the response to the console and updates the state (`setAlbumList`). It filters out the deleted album from the existing `albumList` using the filter method. This ensures that the UI reflects the updated array without the deleted album.
+
+3. **Error Handling**: If there's an error during the deletion (rejected promise), it logs the error to the console. This helps in debugging and understanding if there are issues with the deletion process.
