@@ -305,11 +305,77 @@ After the data from the backend is fetched, it is mounted to the component using
     
     4. **Navigation Link:** The `Link` component is used to create a navigation link to view the details of a specific album. It directs to the route `/album/:id/view` where `:id` is the unique identifier of the album.
 
-### `DisplayOneAlbum.jsx` _wip_
+
+### `DisplayOneAlbum.jsx`
 
 <div align="center">
-<img src="" width="450px" height="auto">
+<img src="./readme-assets/AlbumApp-DisplayOne.png" width="450px" height="auto">
 </div>
+
+This component fetches details of a specific album (stored using local state) based on the `id` parameter from the URL. The `useEffect` hook is then used to trigger the API request when the component mounts, retrieving the album’s details to display in the JSX.
+
+#### Imports:
+```javascript
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import EditButton from './styles/EditButton';
+import DeleteButton from './styles/DeleteButton';
+import { formatDate } from '../utils/dateUtils';
+```
+1. **React, `useEffect`, and `useState`**: The component is built using React and utilizes the `useEffect` and `useState` hooks for managing side effects and local state, respectively.
+
+2. **axios**: This library is imported for making HTTP requests to fetch details of a specific album from the backend API.
+
+3. **`Link`, `useNavigate`, and `useParams`**: The `useParams` hook from `'react-router-dom'` is used to access the `id` parameter from the URL.
+
+4. **Styled Components**: These customized styled components are imported to create a more intuitive UI for users to edit and delete album entries.
+
+5. **`formatDate` Utility**: Located in **utils directory** in the **src/** folder. This is imported to format the date in a consistent user-friendly manner to see `createdAt` and `updatedAt` dates.
+
+#### Component Setup:
+```javascript
+const DisplayOneAlbum = () => {
+    const [ albumDetails, setAlbumDetails ] = useState({});
+    const { id } = useParams();
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/album/${id}`)
+            .then((res) => {
+                console.log("=== Album Details loaded:", res);
+                setAlbumDetails(res.data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
+    
+    const deleteHandler = (id) => {
+        axios.delete(`http://localhost:8000/api/album/delete/${id}`)
+            .then((res) => {
+                console.log("=== Album deleted!", res);
+                navigate("/");
+            })
+            .catch(err => console.log(err));
+    }
+	// Rest of the component removed for brevity...
+}
+```
+1. **Route Parameter**: As mentioned above, the `useParams` hook is used to extract the id parameter from the current route.
+
+2. **Local State**: The component then uses the **`useState` hook** to manage the local state for the album’s details.
+
+3. **useEffect Hook**: Using the `id` parameter, the **`useEffect` hook** fetches the album’s details from the backend API when the component mounts. It makes a GET request to the endpoint: [http://localhost:8000/api/album/:id](#).
+
+4. **`deleteHandler()` Function**: This function will handle the deletion of an album in this page by using the `id` paramter from the URL to then access the backend API endpoint: [http://localhost:8000/api/album/delete/:id](#). Sucessful deletion will navigate the user to the app's home page.
+
+#### Rendering Album Details
+1. **JSX Structure**: The component returns JSX that displays the details of the product.
+
+2. **Conditional Rendering**: The details are conditionally rendered based on whether the product has been populated.
+
+3. **Album Actions**: Buttons for editing and deleting the product are displayed. These buttons are styled using imported styled components.
+
+
 
 ### `CreateAlbumForm.jsx` _wip_
 
