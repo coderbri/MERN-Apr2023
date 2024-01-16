@@ -4,7 +4,7 @@
 
 ## Topics Covered
 
-### [D19: Login & Registration, Part I](Lecture-Code/D19-Login_and_Reg_Part_I/)
+### [D19: Login & Registration, Part I](Lecture-Code/D19-Login_and_Registration_Part_I/)
 - Introduction
 - Authentication and Authorization
 - Environment Variables
