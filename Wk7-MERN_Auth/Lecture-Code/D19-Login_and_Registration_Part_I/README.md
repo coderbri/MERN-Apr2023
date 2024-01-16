@@ -42,5 +42,7 @@
 ## Model Setup (UPDATED)
 ### Middleware
 
-
-## Client Setup
+### decoding jwt
+- jwt.io
+    - copy cookie value and paste into "encoded" textbox
+    - in the "decoded" box, we should be able to see some sensitve information revealed (name, secret key, etc)
