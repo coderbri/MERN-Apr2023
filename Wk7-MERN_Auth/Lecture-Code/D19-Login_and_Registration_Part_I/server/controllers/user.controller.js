@@ -22,13 +22,13 @@ module.exports = {
             // check if inputted email already exists in db
             const potentialUser = await User.findOne({ email: request.body.email })
             if (potentialUser) {
-                res.status(200).json({ msg: 'That email already exists. Please login' })
+                response.status(200).json({ msg: 'That email already exists. Please login' })
             } else { // if not, create a new user object
                 const newUser = await User.create( request.body );
-                res.status(201).json(newUser);
+                response.status(201).json(newUser);
             }
         } catch (error) {
-            res.status(400).json(error);
+            response.status(400).json(error);
         }
     }
     
