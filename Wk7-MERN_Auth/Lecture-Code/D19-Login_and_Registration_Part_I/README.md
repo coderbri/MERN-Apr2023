@@ -176,7 +176,7 @@ UserSchema.pre('validate', function(next) {
 One common feature of Middleware is the "next" function. Essentially when our Middleware has finished whatever it needs to do, we need to call this to have the next Middleware or next function (in this case normal validations) run.
 
 ### Bcrypt
-Passwords should never be saved as actual text. Bcrypt is a very popular library for hashing passwords and easy to install as well using the terminal command here.
+Passwords should never be saved as actual text. Bcrypt is a very popular library for hashing passwords and easy to install as well using the [terminal command here](#packages-needed).
 This will be used as a middleware "pre hook", before the user is saved into the database.
 ```js
 // near the top where the other imports are
@@ -192,12 +192,12 @@ UserSchema.pre('save', function(next) {
 });
 ```
 
-Since Bcrypt is used asynchronously, it will be used with Promises. The "10" inside the `bcrypt.hash()` function refers to the number of salt rounds that Bcrypt will use when generating a salt. Then the next() function is called to proceed with the next steps of validations.
+Since Bcrypt is used asynchronously, it will be used with Promises. The "10" inside the `bcrypt.hash()` function refers to the number of salt rounds that Bcrypt will use when generating a salt. Then the `next()` function is called to proceed with the next steps of validations.
 
 ## User Controller Setup
 These users will need to be saved in a database, and will be created via a registration form. This registration form will make a call to the API in order to actually register the user in the database. The hashing of the password will be done at the Schema level, so there will be no need for that logic here, as well as all other validations.
 
-1. The controller will take in the following Imports:
+1. The controller will take in the following imports:
     ```js
     const User = require('../models/user.model');
     const secret = process.env.SECRET_KEY;
@@ -205,8 +205,7 @@ These users will need to be saved in a database, and will be created via a regis
     const bcrypt = require('bcrypt');
     ```
 
-2. **Register User Method:**
-    On registration, the registerUser method first check for existing email addresses and let know if there is already an existing user. If not, then the new user created with the valid data will be passed from the request via request.body, a JWT is generated and sent back as a cookie to the client, and finally returns the new user data. The method also includes error handling for a smooth user registration process.
+2. **Register User Method:** On registration, the `registerUser` method first check for existing email addresses and let know if there is already an existing user. If not, then the new user created with the valid data will be passed from the request via `request.body`, a JWT is generated and sent back as a cookie to the client, and finally returns the new user data. The method also includes error handling for a smooth user registration process.
     ```js
     registerUser: async (request, response) => {
         try {
@@ -264,5 +263,49 @@ When decoding JSON Web Tokens (JWT), a helpful tool is [jwt.io](https://jwt.io/)
 
 Using [jwt.io](https://jwt.io/) simplifies the process of inspecting the contents of a JWT, aiding in verifying that the expected information is present within the token. It is essential to exercise caution when handling JWTs, particularly in production environments.
 
+## `User` Routes Setup
+
+1.  **Importing Controller:**
+    ```javascript
+    const UserController = require('../controllers/user.controller');
+    ```
+    This line imports the `UserController` from the `user.controller.js` file, which contains methods for handling user-related operations.
+
+2. **Exporting Routes:**
+    ```javascript
+    module.exports = app => {
+        app.post("/api/register/user", UserController.registerUser);
+    }
+    ```
+    - This module exports a function that takes an Express `app` instance as a parameter. Inside the function, a POST route is defined for handling user registration. It specifies the endpoint `/api/register/user` and associates it with the `registerUser` method from the `UserController`.
+    - **_Why Post?_** The `registerUser` method is implemented as a POST route, adhering to RESTful API design principles. This choice signifies its purpose of creating a new user resource on the server. With a POST request, user registration details are sent securely in the request body, allowing the handling of sensitive information such as passwords. The method ensures data integrity and follows conventions for creating resources in web development.
+
 ## `server.js` Setup
-wip
+
+```javascript
+const express = require('express');
+const app = express();
+const cors = require('cors');
+
+app.use(cors());
+const port = 8000;
+
+require('./config/mongoose.config');
+require('dotenv').config(); // ! NEW
+app.use(express.json(), express.urlencoded({ extended: true }));
+
+const UserRoutes = require('./routes/user.routes');
+UserRoutes(app);
+
+app.listen(port, () => console.log(`Listening on port: ${port}`));
+```
+
+`server.js` sets up an Express server, configures middleware, connects to the database, and defines routes for user registration. The actual user registration logic is handled in the `user.model.js`, `user.routes.js` and `user.controller.js` files.
+
+Everything in the **server** folder relatively stays the same except that we now import `dotenv`.
+
+- **Environment Variables:** Loads environment variables from a `.env` file into the `process.env` global object. For more information about how this is implemented in this project, go [here](#packages-needed).
+    ```javascript
+    require('dotenv').config();
+    ```
+
