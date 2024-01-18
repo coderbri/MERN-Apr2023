@@ -2,7 +2,7 @@ import React from 'react';
 import DeleteButton from './styles/DeleteButton.styled';
 import EditButton from './styles/EditButton.styled';
 
-const DisplayAllAuthors = ({ authorsList }) => {
+const DisplayAllAuthors = ({ authorsList, deleteHandler }) => {
     
     return (
         <div className='max-w-lg mx-auto'>
@@ -25,7 +25,7 @@ const DisplayAllAuthors = ({ authorsList }) => {
                         <td className='px-6 py-4'>
                             <div className='flex justify-center gap-4'>
                                 <EditButton />
-                                <DeleteButton />
+                                <DeleteButton authorId={author._id} sucessCallback={() => deleteHandler(author._id)} />
                             </div>
                         </td>
                     </tr>

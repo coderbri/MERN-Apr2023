@@ -17,7 +17,14 @@ function App() {
       .catch(err => console.log(err));
   }, []);
   
-  const deleteHandler = authorId => {}
+  const handleAuthorDeletion = authorId => {
+    axios.delete(`http://localhost:8000/api/author/delete/${authorId}`)
+      .then((res) => {
+        console.log(res);
+        setAuthors(authors.filter( author => author._id !== authorId ))
+      })
+      .catch(err => console.log(err));
+  }
   
   return (
     <>
@@ -32,6 +39,7 @@ function App() {
           <Route path={"/"} 
             element={<DisplayAllAuthors
                 authorsList={authors}
+                deleteHandler={handleAuthorDeletion}
             />}
           />
           
