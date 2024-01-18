@@ -83,7 +83,7 @@ These commands will be run in the root directory (server) of the project where t
 
 8. **Cookie Parser:**
     ```bash
-    npm install cookieparser
+    npm install cookie-parser
     ```
     **Purpose:** cookieparser is used to parse cookies from the HTTP request headers. In the context of the provided code, it's likely used to handle and parse the userToken cookie sent from the client.
 
