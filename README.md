@@ -39,9 +39,20 @@ Course Taken: ２０２３年０４月
     - [#020: Faker API](Wk4-Backend_Development/020-Faker_API/)
     - [#021: MongoDB Practice](Wk4-Backend_Development/021-MongoDB_Practice/)
     - [#022: Jokes API](Wk4-Backend_Development/022-Jokes_API/)
-    ---
 
 - **Full-Stack MERN**
     - [#023: Product Manager - Part I](Wk5-FullStack_MERN/023-Product_Manager/)
-    <!-- - [#024: Product Manager - Part II](#) -->
-    <!-- - [#025: Product Manager - Part III](#) -->
+    ---
+    - [#024: Refactor, Reuse, Recycle](#)
+    - [#025: Authors](Wk5-FullStack_MERN/025-Authors/)
+    - [#026: Team Manager](#)
+
+
+<!-- 
+- **OOP & Class Components**
+    - [#030: User OOP](#)
+    - [#031: BankAccount OOP](#)
+    - [#032: BankAccount OOP](#)
+- **MERN Authentication**
+    - [#040: ---](#)
+-->
