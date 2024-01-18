@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 import DisplayAllAuthors from './components/DisplayAllAuthors'
 import HeaderStyled from './components/styles/Header.styled'
+import AuthorForm from './components/AuthorForm'
 
 function App() {
   
   const [ authors, setAuthors ] = useState([]);
+  const [ formErrors, setFormErrors ] = useState([]);
   
   useEffect(() => {
     axios.get('http://localhost:8000/api/authors')
@@ -26,6 +27,18 @@ function App() {
       .catch(err => console.log(err));
   }
   
+  const createAuthor = authorObject => {
+    axios.post('http://localhost:8000/api/author/new', authorObject)
+      .then((res) => {
+        console.log(res);
+        setAuthors([ ...authors, res.data ]);
+      })
+      .catch((err) => {
+        console.log(err.response);
+        setFormErrors(err.response.data.errors)
+      });
+  }
+  
   return (
     <>
       <HeaderStyled>
@@ -34,16 +47,21 @@ function App() {
         </h1>
       </HeaderStyled>
       
-      <div className="container">
-        <Routes>
-          <Route path={"/"} 
-            element={<DisplayAllAuthors
-                authorsList={authors}
-                deleteHandler={handleAuthorDeletion}
-            />}
-          />
-          
-        </Routes>
+      <div className="container mx-auto">
+        
+        <h2 className='text-3xl font-bold text-center my-3'>Add a New Author Now!</h2>
+        <AuthorForm
+            onSubmitProp={ createAuthor }
+            errors={ formErrors }
+            initialAuthorFName=""
+            initialAuthorLName=""
+        />
+        
+        <DisplayAllAuthors
+            authorsList={ authors }
+            deleteHandler={ handleAuthorDeletion }
+        />
+        
       </div>
     </>
   )
