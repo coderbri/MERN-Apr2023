@@ -2,6 +2,7 @@ import HeaderStyled from './components/styles/Header.styled'
 import Button from './components/styles/Button.styled';
 import SwitchLightDarkModeBtn from './components/styles/SwitchLightDarkModeBtn.styled';
 import { useState, useEffect } from 'react';
+import LoginForm from './components/LoginForm';
 
 function App() {
   
@@ -20,16 +21,15 @@ function App() {
   return (
     <>
       <HeaderStyled isDarkMode={isDarkMode} h1Child={<a href="/">D20 MERN Auth</a>}>
-        <nav className='flex justify-center items-center gap-4 mt-4 sm:mt-0'>
-          <p>Link</p>
-          <p>Link</p>
+        <nav className='flex justify-center items-center gap-4'>
           <SwitchLightDarkModeBtn isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
           <Button>Login</Button>
         </nav>
       </HeaderStyled>
       
       <div className="container mx-auto">
-        <h2>Hello World</h2>
+        {/* <h2>Hello World</h2> */}
+        <LoginForm isDarkMode={isDarkMode} />
       </div>
     </>
   )
