@@ -1,8 +1,10 @@
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom'
 import HeaderStyled from './components/styles/Header.styled'
 import Button from './components/styles/Button.styled';
 import SwitchLightDarkModeBtn from './components/styles/SwitchLightDarkModeBtn.styled';
-import { useState, useEffect } from 'react';
 import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 
 function App() {
   
@@ -28,8 +30,11 @@ function App() {
       </HeaderStyled>
       
       <div className="container mx-auto">
-        {/* <h2>Hello World</h2> */}
-        <LoginForm isDarkMode={isDarkMode} />
+        <Routes>
+          <Route path='/' element={<RegisterForm isDarkMode={isDarkMode} />} />
+          <Route path='/login' element={<LoginForm isDarkMode={isDarkMode} />} />
+        </Routes>
+        
       </div>
     </>
   )
