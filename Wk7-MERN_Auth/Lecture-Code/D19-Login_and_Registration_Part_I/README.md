@@ -18,7 +18,10 @@
         - [Bcrypt](#bcrypt)
         - [User Controller Setup](#user-controller-setup)
     - [User Controller Setup](#user-controller-setup)
+        - [Registration](#registration)
+        - [Login and Logout](#login-and-logout)
         - [Extra: Decoding JSON Web Tokens](#extra-decoding-json-web-tokens)
+    - [User Routes Setup](#user-routes-setup)
     - [`server.js` Setup](#serverjs-setup)
 <!-- - [Client Setup](#client-setup) -->
 
@@ -195,6 +198,8 @@ UserSchema.pre('save', function(next) {
 Since Bcrypt is used asynchronously, it will be used with Promises. The "10" inside the `bcrypt.hash()` function refers to the number of salt rounds that Bcrypt will use when generating a salt. Then the `next()` function is called to proceed with the next steps of validations.
 
 ## User Controller Setup
+
+### Registration
 These users will need to be saved in a database, and will be created via a registration form. This registration form will make a call to the API in order to actually register the user in the database. The hashing of the password will be done at the Schema level, so there will be no need for that logic here, as well as all other validations.
 
 1. The controller will take in the following imports:
@@ -231,9 +236,50 @@ These users will need to be saved in a database, and will be created via a regis
     ```
 
 
-_Coming Soon_
-3. **Login User Method**
-4. **Logout User Method**
+### Login and Logout
+3. **Login User Method:** On user login, the `loginUser` method checks for the existence of the provided email in the database. If the user exists, it verifies the entered password against the hashed password in the database. Upon successful verification, a JWT is generated and sent back as a cookie to the client, marking the user as logged in. The method includes error handling for various scenarios, ensuring a secure login process.
+
+    ```js
+    loginUser: async (request, response ) => {
+        try {
+            // Check if the user with the provided email exists
+            const user = await User.findOne({ email: request.body.email });
+
+            if (user) {
+                // Verify if the entered password matches the stored hashed password
+                const passwordsMatch = await bcrypt.compare(request.body.password, user.password);
+
+                if (passwordsMatch) {
+                    // Generate a user token
+                    const userToken = jwt.sign({ _id: user._id, email: user.email }, secret, { expiresIn: '2h' });
+
+                    // Log the user in by sending the userToken as a cookie
+                    response.status(201).cookie('userToken', userToken, { httpOnly: true, maxAge: 2*60*60*1000 }).json(user);
+                } else {
+                    // If the email exists but passwords don't match, respond with an error
+                    response.status(400).json({ message: "Invalid email/password" });
+                }
+            } else {
+                // If the user doesn't exist, respond with an error
+                response.status(400).json({ message: "Invalid email/password" });
+            }
+        } catch (error) {
+            // Handle errors and respond with a status of 400
+            response.status(400).json(error);
+        }
+    }
+    ```
+
+4. **Logout User Method:** The `logoutUser` method clears the userToken cookie, effectively logging the user out. It responds with a message indicating that the user has successfully logged out.
+    ```js
+    logoutUser: async (request, response) => {
+        // Clear the userToken cookie to log the user out
+        response.clearCookie('userToken').json({ message: "You've logged out!" });
+    }
+    ```
+
+These methods collectively manage user authentication, providing a secure and seamless experience for user registration, login and logout actions in a MERN application.
+
 
 ### Extra: Decoding JSON Web Tokens
 When decoding JSON Web Tokens (JWT), a helpful tool is [jwt.io](https://jwt.io/). Follow these steps:
@@ -262,36 +308,59 @@ When decoding JSON Web Tokens (JWT), a helpful tool is [jwt.io](https://jwt.io/)
 **Note:** While decoding a JWT on [jwt.io](https://jwt.io/) is beneficial for understanding its contents, it's crucial to handle tokens securely and avoid exposing sensitive information in client-side code. Always adhere to best practices for token handling and storage to ensure the security of your application.
 
 Using [jwt.io](https://jwt.io/) simplifies the process of inspecting the contents of a JWT, aiding in verifying that the expected information is present within the token. It is essential to exercise caution when handling JWTs, particularly in production environments.
+Certainly! Here's the explanation for the login and logout user routes in the same format as the register user route:
 
 ## `User` Routes Setup
 
-1.  **Importing Controller:**
+1. **Importing Controller:**
     ```javascript
     const UserController = require('../controllers/user.controller');
     ```
     This line imports the `UserController` from the `user.controller.js` file, which contains methods for handling user-related operations.
-
+    
 2. **Exporting Routes:**
     ```javascript
     module.exports = app => {
         app.post("/api/register/user", UserController.registerUser);
+        app.post("/api/login/user", UserController.loginUser);
+        app.post("/api/logout/user", UserController.logoutUser);
     }
     ```
-    - This module exports a function that takes an Express `app` instance as a parameter. Inside the function, a POST route is defined for handling user registration. It specifies the endpoint `/api/register/user` and associates it with the `registerUser` method from the `UserController`.
-    - **_Why Post?_** The `registerUser` method is implemented as a POST route, adhering to RESTful API design principles. This choice signifies its purpose of creating a new user resource on the server. With a POST request, user registration details are sent securely in the request body, allowing the handling of sensitive information such as passwords. The method ensures data integrity and follows conventions for creating resources in web development.
+   - This module exports a function that takes an Express `app` instance as a parameter. Inside the function, POST routes are defined for handling user registration, login, and logout.
+   - **_User Registration Route:_**
+        ```javascript
+        app.post("/api/register/user", UserController.registerUser);
+        ```
+        - This route is associated with the `registerUser` method from the `UserController`. It handles user registration by accepting registration details in the request body via a POST request to the `/api/register/user` endpoint.
+    
+   - **_User Login Route:_**
+        ```javascript
+        app.post("/api/login/user", UserController.loginUser);
+        ```
+        - This route is associated with the `loginUser` method from the `UserController`. It facilitates user login by processing login credentials (email and password) sent in the request body via a POST request to the `/api/login/user` endpoint.
+    
+   - **_User Logout Route:_**
+        ```javascript
+        app.post("/api/logout/user", UserController.logoutUser);
+        ```
+        - This route is associated with the `logoutUser` method from the `UserController`. It handles user logout by clearing the userToken cookie, effectively ending the user's session. The route is triggered by a POST request to the `/api/logout/user` endpoint.
+
+These routes collectively enable user registration, login, and logout functionalities in a MERN application, providing a comprehensive authentication system.
 
 ## `server.js` Setup
 
 ```javascript
 const express = require('express');
 const app = express();
-const cors = require('cors');
-
-app.use(cors());
 const port = 8000;
+const cors = require('cors');
+const cookieParser = require('cookie-parser'); // ! NEW
 
 require('./config/mongoose.config');
 require('dotenv').config(); // ! NEW
+
+app.use(cookieParser()); // ! NEW
+app.use(cors({ credentials: true, origin: 'http://localhost:5173' })); // ! NEW
 app.use(express.json(), express.urlencoded({ extended: true }));
 
 const UserRoutes = require('./routes/user.routes');
