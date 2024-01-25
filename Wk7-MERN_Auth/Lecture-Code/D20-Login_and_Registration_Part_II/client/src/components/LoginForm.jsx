@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
-const LoginForm = ({ isDarkMode }) => {
+const LoginForm = ({ isDarkMode, setIsLoggedIn }) => {
+    
+    const navigate = useNavigate();
+    const [ user, setUser ] = useState({
+        email: "",
+        password: "",
+    });
+    const [ errors, setErrors ] = useState({});
+    
+    const changeHandler = e => {
+        setUser({ ...user, [e.target.name]: e.target.value });
+    }
     
     const submitHandler = e => {
         e.preventDefault();
+        axios.post('http://localhost:8000/api/login/user', user, { withCredentials: true})
+            .then((res) => {
+                console.log(res);
+                setIsLoggedIn(true);
+                navigate('/dashboard');
+            })
+            .catch((err) => {
+                console.log(err.response);
+                setErrors(err.response.data);
+            });
     }
     
     return (
@@ -13,8 +36,8 @@ const LoginForm = ({ isDarkMode }) => {
                 
                 <form onSubmit={submitHandler} className="max-w-md mx-auto">
                     
-                    <div className="relative mb-5">
-                        <input type="text" className={`block p-2.5 w-full text-sm
+                <div className="relative mb-5">
+                        <input type="text" name='email' onChange={changeHandler} value={user.email} className={`block p-2.5 w-full text-sm
                             pt-5 rounded-lg border-2 appearance-none focus:outline-none focus:ring-0 peer
                             ${ isDarkMode 
                                 ? 'bg-zinc-700 border-zinc-600 focus:border-indigo-400'
@@ -32,7 +55,7 @@ const LoginForm = ({ isDarkMode }) => {
                     </div>
                     
                     <div className="relative mb-5">
-                        <input type="password" className={`block p-2.5 w-full text-sm
+                        <input type="password" name='password' onChange={changeHandler} value={user.password} className={`block p-2.5 w-full text-sm
                             pt-5 rounded-lg border-2 appearance-none focus:outline-none focus:ring-0 peer
                             ${ isDarkMode 
                                 ? 'bg-zinc-700 border-zinc-600 focus:border-indigo-400'
@@ -47,19 +70,18 @@ const LoginForm = ({ isDarkMode }) => {
                                 : 'bg-zinc-200/75 peer-focus:text-indigo-600'
                             }
                         `}>Password</label>
-                    {/* { errors.authorFirstName
-                        ? <p className="text-sm mt-2 font-bold text-red-600 dark:text-red-400">{ errors.authorFirstName.message }</p>
-                        : null
-                    } */}
                     </div>
+                    {errors.message &&
+                        <p className="text-sm font-bold text-red-600 dark:text-red-400">{errors.message}</p>
+                    }
                     
                     
                     <div className='mt-10'>
-                        <input type="submit" value="Login" className='block w-full py-2 rounded-lg cursor-pointer bg-indigo-400 hover:bg-indigo-200 text-lg font-semibold' />
+                        <button className='block w-full py-2 rounded-lg cursor-pointer bg-indigo-400 hover:bg-indigo-200 text-lg font-semibold'>Login</button>
                         
                         <div className="my-5 grid w-full grid-cols-3">
                             <div className={`mb-2 border-b-2 ${ isDarkMode ? 'border-zinc-600' : 'border-zinc-300' }`} />
-                            <p className='text-sm text-center text-indigo-500 dark:text-indigo-400 font-semibold'>Register Now</p>
+                            <Link to={'/'} className='text-sm text-center text-indigo-500 dark:text-indigo-400 font-semibold'>Register Now</Link>
                             <div className={`mb-2 border-b-2 ${ isDarkMode ? 'border-zinc-600' : 'border-zinc-300' }`} />
                         </div>
                     </div>
