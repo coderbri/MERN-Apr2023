@@ -1,6 +1,6 @@
 # Week 7: MERN Authentication
 
-２０２４年０１月１０日（水）ー ２０２４年０１月＿日（＿）
+２０２４年０１月１０日（水）ー ２０２４年０１月２４日（水）
 
 ## Topics Covered
 
