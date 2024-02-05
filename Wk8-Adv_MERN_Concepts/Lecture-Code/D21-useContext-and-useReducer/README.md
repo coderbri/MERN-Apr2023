@@ -14,8 +14,12 @@
     - [Application in Components: `UserForm.jsx` and `DisplayUsers.jsx`](#application-in-components-userformjsx-and-displayusersjsx)
 
 - [**`useReducer`**](#usereducer)
+    - [Reducer Function (`reducer`)](#reducer-function-reducer)
+    - [Component State and `useReducer`](#component-state-and-usereducer)
+    - [Submitting a Todo](#submitting-a-todo)
+    - [Form Rendering](#form-rendering)
 
-# useContext
+## useContext
 `useContext` is a React Hook that simplifies the process of sharing and accessing global state across components. It allows a component to subscribe to a specific context, gaining direct access to the values provided by a `Context.Provider` higher up in the component tree. By utilizing `useContext`, components can consume shared data without the need for prop drilling, streamlining the flow of information and enhancing the overall maintainability and scalability of React applications. This hook is particularly useful for scenarios where multiple components need access to common state or configuration, offering a concise and efficient solution for managing shared data in a React application.
 
 ### File Structure
@@ -92,8 +96,11 @@ export default ExampleComponent;
 
 In this example, the `.Consumer` component allows class components to efficiently consume and interact with context values provided by a `Context.Provider`. While modern React applications often use functional components and hooks like `useContext`, understanding the `.Consumer` approach is valuable, especially when working with legacy codebases or class-based React components.
 
+<div align="center">
+<img src="./imgs/ContextProvider.png" width="450px" height="auto">
+</div>
 
-## Main Component: `App.jsx`
+### Main Component: `App.jsx`
 ```jsx
 import DisplayUsers from "./components/DisplayUsers"
 import UserForm from "./components/UserForm"
@@ -119,6 +126,9 @@ export default App
 
 #### Explanation:
 **Provider Wrapping:** The `UserForm` and `DisplayUsers` components are wrapped with the `UserProvider`. This ensures that these components, and any descendants of them, have access to the state provided by the `UserProvider`.
+<div align="center">
+<img src="./imgs/UserProvider.png" width="450px" height="auto">
+</div>
 
 
 ### Application in Components: `UserForm.jsx` and `DisplayUsers.jsx`
@@ -126,7 +136,9 @@ Both of these components use the `useContext` hook to access the `userContext`. 
 
 This setup enables the components to interact with the shared state managed by `useContext`, facilitating a centralized approach to state management in your React application.
 
+
 #### `UserForm.jsx`
+
 ```jsx
 import React, { useContext, useState } from 'react';
 import { userContext } from '../context/UserContext';
@@ -151,8 +163,13 @@ const UserForm = () => {
 
 export default UserForm;
 ```
+<div align="center">
+<img src="./imgs/UserForm.png" width="450px" height="auto">
+</div>
+
 
 #### `DisplayUsers.jsx`
+
 ```jsx
 import React, { useState, useContext } from 'react';
 import { userContext } from '../context/UserContext';
@@ -173,5 +190,62 @@ const DisplayUsers = (props) => {
 
 export default DisplayUsers;
 ```
+<div align="center">
+<img src="./imgs/DisplayUsers.png" width="450px" height="auto">
+</div>
 
-# useReducer
+
+## useReducer
+`useReducer` is a React Hook that is used for managing more complex state logic in React applications. It is particularly useful when the state transitions depend on the previous state and involve complex logic, such as in the case of handling different actions.
+
+In the `TodoReducer.jsx` code, a simple example of `useReducer` is demonstrated. Let's break down the key elements:
+
+### Reducer Function (`reducer`)
+```jsx
+const reducer = (todos, action) => {
+    console.log(`TODOS: ${todos}`);
+    console.log('PAYLOAD', action.payload);
+    console.log('PAYLOAD TODO', action.payload.todo);
+    switch(action.type){
+        case 'ADD_TODO':
+            return [...todos, action.payload.todo];
+    }
+}
+```
+- The `reducer` function takes two parameters: `todos` (current state) and `action` (an object describing what happened).
+- The function logs the current state (`todos`), the payload of the action, and the specific `todo` from the payload for debugging purposes.
+- Inside the switch statement, the function handles different action types. In this example, it specifically handles the 'ADD_TODO' action type, where it returns a new state by spreading the existing `todos` and adding the new todo item from the action payload.
+
+<div align="center">
+<img src="./imgs/useReducer-with-Todos.png" width="450px" height="auto">
+</div>
+
+### Component State and `useReducer`
+```jsx
+const [ todo, setTodo ] = useState('');
+const [ todoList, dispatch ] = useReducer(reducer, []);
+```
+- The component uses the `useState` hook to manage the local state of `todo`, representing the value of the input field.
+- `useReducer` is used to manage a more complex state, `todoList`, by invoking the `reducer` function. The initial state is an empty array (`[]`).
+
+### Submitting a Todo
+```jsx
+const submitTodo = (e) => {
+    e.preventDefault();
+    dispatch({ type:'ADD_TODO', payload:{todo:todo} });
+}
+```
+- The `submitTodo` function is triggered when the form is submitted.
+- It prevents the default form submission behavior.
+- It calls the `dispatch` function with an action object, specifying the type as 'ADD_TODO' and providing a payload containing the new todo item (`{todo: todo}`).
+
+### Form Rendering
+```jsx
+<input type="text" value={ todo } onChange={(e) => setTodo(e.target.value)} />
+<button type="submit">Add Task</button>
+```
+- The input field is controlled by the `todo` state, ensuring that the input value reflects the state.
+- The `onChange` handler updates the `todo` state as the user types.
+- The form has a submit button triggering the `submitTodo` function.
+
+Overall, this example demonstrates how `useReducer` can be used to manage state transitions and actions in a React component. It is particularly beneficial when dealing with more complex state logic or when actions involve intricate computations based on the previous state.

@@ -1,4 +1,5 @@
 import DisplayUsers from "./components/DisplayUsers"
+import TodoReducer from "./components/TodoReducer"
 import UserForm from "./components/UserForm"
 import { UserProvider } from './context/UserContext'
 
@@ -10,6 +11,10 @@ function App() {
           <UserProvider>
             <UserForm />
             <DisplayUsers />
+            
+            <hr className="mt-10" />
+            <TodoReducer />
+            
           </UserProvider>
         </div>
     </>
